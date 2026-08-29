@@ -375,6 +375,8 @@ def build_sections(events: list[dict[str, object]], records: list[dict[str, obje
     Sections come from dated theographic events that carry locations; events sharing a first verse merge.
     Each section spans from its first verse to the verse before the next section (tiling the whole chapter);
     a chapter with no located events becomes a single whole-chapter section using all its places.
+    Every place whose verse mentions fall inside a section's range is unioned into that section's placeIds,
+    so section highlighting covers the same places as chapter highlighting, split by verse range.
     """
     by_chapter: dict[int, dict[int, dict[str, object]]] = {}
     for event in events:
@@ -393,9 +395,14 @@ def build_sections(events: list[dict[str, object]], records: list[dict[str, obje
             if entry["year"] is None:
                 entry["year"] = event["year"]
     chapter_place_ids: dict[int, set[str]] = {}
+    verse_place_ids: dict[tuple[int, int], set[str]] = {}
     for record in records:
         for chapter in record.get("chapters", []):
             chapter_place_ids.setdefault(int(str(chapter)), set()).add(str(record["id"]))
+        for ref in record.get("verses", []):
+            ref_match = ACTS_VERSE_RE.fullmatch(str(ref))
+            if ref_match:
+                verse_place_ids.setdefault((int(ref_match.group(1)), int(ref_match.group(2))), set()).add(str(record["id"]))
     sections: list[dict[str, object]] = []
     for chapter, (start_year, _end, _unc, label) in sorted(CHAPTER_YEARS.items()):
         count = ACTS_VERSE_COUNTS[chapter]
@@ -417,16 +424,19 @@ def build_sections(events: list[dict[str, object]], records: list[dict[str, obje
         for index, verse in enumerate(verses):
             entry = bucket[verse]
             start = 1 if index == 0 else verse
-            end = verses[index + 1] - 1 if index + 1 < len(verses) else count
+            end = max(verses[index + 1] - 1 if index + 1 < len(verses) else count, start)
+            place_ids: set[str] = set(entry["placeIds"])  # type: ignore[arg-type]
+            for verse_number in range(start, end + 1):
+                place_ids.update(verse_place_ids.get((chapter, verse_number), set()))
             sections.append(
                 {
                     "id": f"s{chapter}-{start}",
                     "chapter": chapter,
                     "startVerse": start,
-                    "endVerse": max(end, start),
+                    "endVerse": end,
                     "title": str(entry["title"]),
                     "year": entry["year"],
-                    "placeIds": sorted(entry["placeIds"]),  # type: ignore[arg-type]
+                    "placeIds": sorted(place_ids),
                 }
             )
     return sections

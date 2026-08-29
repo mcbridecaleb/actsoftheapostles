@@ -37,7 +37,7 @@
       (repo mcbridecaleb/actsoftheapostles, public, Pages from main root).
     - Branch/Commit: main, initial commit + markdown-link fix commit (created this session).
     - Related tickets/links: none (NOISSUE).
-    - Last updated: 2026-08-29 16:45 CT
+    - Last updated: 2026-08-29 17:05 CT
 - Done:
     - Data pipeline: raw sources checked into tools/raw/; build_data.py generates
       data/places.json (107 places, 0 unmatched) + data/timeline.json (28 chapters,
@@ -55,6 +55,11 @@
       raw markdown links ([Acts 18:12](/acts#...)) that rendered literally in the callout;
       data/places.json regenerated (107 places, 0 unmatched, --check exit 0).
 - Now:
+    - Section placeIds enriched: build_sections now unions every place whose verse
+      mentions fall inside the section's verse range (was: only the theographic event's
+      key locations, so e.g. Acts 11 sections highlighted 1 place each vs the chapter's 9).
+      Verified: sections' union per chapter exactly equals the chapter's place set for
+      all 28 chapters.
     - Verse-section strip: timeline.json now carries 79 sections (build_sections in
       build_data.py, from theographic events with locations; ACTS_VERSE_COUNTS positions
       them within chapter blocks). Collapsed 8px sliver row under the chapters expands to
