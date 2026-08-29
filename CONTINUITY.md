@@ -37,7 +37,7 @@
       (repo mcbridecaleb/actsoftheapostles, public, Pages from main root).
     - Branch/Commit: main, initial commit + markdown-link fix commit (created this session).
     - Related tickets/links: none (NOISSUE).
-    - Last updated: 2026-08-29 15:25 CT
+    - Last updated: 2026-08-29 15:40 CT
 - Done:
     - Data pipeline: raw sources checked into tools/raw/; build_data.py generates
       data/places.json (107 places, 0 unmatched) + data/timeline.json (28 chapters,
@@ -55,6 +55,10 @@
       raw markdown links ([Acts 18:12](/acts#...)) that rendered literally in the callout;
       data/places.json regenerated (107 places, 0 unmatched, --check exit 0).
 - Now:
+    - Post-ship tweaks: H hotkey resets map to home view (KEYS + EVENTS.VIEW_RESET in
+      config.js, emitted by main.js keydown, handled in map.js; help tip added); route
+      line opacity lowered 0.85 -> 0.55 (ROUTE_STYLE in config.js). Verified in headless
+      Chromium (view resets, selection retained, zero console errors).
     - Shipped. Pushed to origin (existing empty repo Caleb pre-created; flipped private ->
       public with user approval), Pages enabled, live page + all css/js/data assets verified
       HTTP 200.

@@ -53,8 +53,12 @@ export const EVENTS = Object.freeze({
   CHAPTER_UNHOVER: 'chapter-unhover',
   CHAPTER_SELECT: 'chapter-select',
   JOURNEY_TOGGLE: 'journey-toggle',
+  VIEW_RESET: 'view-reset',
   CLEAR: 'clear',
 });
+
+/** Keyboard shortcuts (compared case-insensitively for letter keys). */
+export const KEYS = Object.freeze({ CLEAR: 'Escape', HOME: 'h' });
 
 /** Selection kinds stored in shared state. */
 export const SELECTION_TYPES = Object.freeze({ PLACE: 'place', CHAPTER: 'chapter' });
@@ -87,7 +91,7 @@ export const MARKER_STYLE = Object.freeze({
 /** Route line styling; sea legs render dashed along a sampled bezier bow. */
 export const ROUTE_STYLE = Object.freeze({
   weight: 3,
-  opacity: 0.85,
+  opacity: 0.55,
   seaDashArray: '6 8',
   bezierSamples: 24,
   bowFactor: 0.15,

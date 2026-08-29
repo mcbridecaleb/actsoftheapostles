@@ -3,7 +3,7 @@
  * map/timeline/callout modules, and build the journey toggle checkboxes.
  */
 
-import { EVENTS, SELECTION_TYPES, JOURNEY_COLORS } from './config.js';
+import { EVENTS, SELECTION_TYPES, JOURNEY_COLORS, KEYS } from './config.js';
 import { on, emit, state } from './state.js';
 import { loadData } from './data.js';
 import { initMap } from './map.js';
@@ -82,8 +82,10 @@ async function bootstrap() {
   initCallout(data);
   buildJourneyToggles(data);
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
+    if (event.key === KEYS.CLEAR) {
       emit(EVENTS.CLEAR);
+    } else if (event.key.toLowerCase() === KEYS.HOME) {
+      emit(EVENTS.VIEW_RESET);
     }
   });
 }

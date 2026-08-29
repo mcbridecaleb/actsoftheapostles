@@ -64,6 +64,7 @@ export function initCallout(data) {
       'Use the checkboxes above the map to toggle each journey.',
       'Hatched timeline blocks mark chapters whose dating is highly uncertain.',
       'Press Escape or click open water to clear the selection.',
+      'Press H to reset the map to its home view.',
     ]) {
       tips.appendChild(el('li', '', tip));
     }

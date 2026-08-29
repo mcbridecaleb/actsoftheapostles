@@ -180,6 +180,9 @@ export function initMap(data) {
       map.fitBounds(bounds, { maxZoom: CHAPTER_FIT_MAX_ZOOM, padding: CHAPTER_FIT_PADDING });
     }
   });
+  on(EVENTS.VIEW_RESET, () => {
+    map.setView(MAP_OPTIONS.center, MAP_OPTIONS.zoom);
+  });
   on(EVENTS.JOURNEY_TOGGLE, ({ id, visible }) => {
     const group = journeyLayers.get(id);
     if (!group) {
