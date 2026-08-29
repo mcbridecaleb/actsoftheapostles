@@ -676,3 +676,29 @@ body.timeline-expanded {
     max-height: 45vh;
   }
 }
+
+/* ---- Place-marker tooltip (compact facts) ---- */
+.place-tooltip {
+  line-height: 1.35;
+}
+
+.place-tooltip-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.place-tooltip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+
+.place-tooltip-sub {
+  font-size: 11px;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}

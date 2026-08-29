@@ -37,7 +37,7 @@
       (repo mcbridecaleb/actsoftheapostles, public, Pages from main root).
     - Branch/Commit: main, initial commit + markdown-link fix commit (created this session).
     - Related tickets/links: none (NOISSUE).
-    - Last updated: 2026-08-29 17:05 CT
+    - Last updated: 2026-08-29 17:25 CT
 - Done:
     - Data pipeline: raw sources checked into tools/raw/; build_data.py generates
       data/places.json (107 places, 0 unmatched) + data/timeline.json (28 chapters,
@@ -55,6 +55,10 @@
       raw markdown links ([Acts 18:12](/acts#...)) that rendered literally in the callout;
       data/places.json regenerated (107 places, 0 unmatched, --check exit 0).
 - Now:
+    - Marker tooltips upgraded to compact facts (user picked from offered styles):
+      name + journey color dots / "Modern: ..." / compressed chapter runs + era
+      ("Acts 18–20 · c. AD 50–57"); DOM-built via textContent (placeTooltip in map.js),
+      lines omitted when data absent.
     - Section placeIds enriched: build_sections now unions every place whose verse
       mentions fall inside the section's verse range (was: only the theographic event's
       key locations, so e.g. Acts 11 sections highlighted 1 place each vs the chapter's 9).

@@ -16,6 +16,7 @@ import {
   SEGMENT_MODES,
   MARKER_STYLE,
   ROUTE_STYLE,
+  UNCERTAINTY,
   CHAPTER_FIT_MAX_ZOOM,
   CHAPTER_FIT_PADDING,
 } from './config.js';
@@ -85,6 +86,73 @@ function segmentPath(segment, placesById) {
 }
 
 /**
+ * Compress a sorted chapter list into a compact label: [18,19,20] -> "Acts 18–20",
+ * [13,14,16] -> "Acts 13–14, 16".
+ * @param {number[]} chapters
+ * @returns {string}
+ */
+function chaptersLabel(chapters) {
+  const runs = [];
+  let start = chapters[0];
+  let prev = chapters[0];
+  for (const chapter of chapters.slice(1)) {
+    if (chapter === prev + 1) {
+      prev = chapter;
+      continue;
+    }
+    runs.push(start === prev ? `${start}` : `${start}–${prev}`);
+    start = chapter;
+    prev = chapter;
+  }
+  runs.push(start === prev ? `${start}` : `${start}–${prev}`);
+  return `Acts ${runs.join(', ')}`;
+}
+
+/**
+ * Build the compact-facts hover tooltip for a place marker as a DOM node
+ * (third-party strings go through textContent, never HTML concatenation).
+ * Layout: name + journey color dots / modern location / chapters + era.
+ * @param {object} place places.json record
+ * @param {object} data bundle from data.js loadData()
+ * @returns {HTMLElement}
+ */
+function placeTooltip(place, data) {
+  const root = document.createElement('div');
+  root.className = 'place-tooltip';
+  const titleRow = document.createElement('div');
+  titleRow.className = 'place-tooltip-title';
+  const name = document.createElement('span');
+  name.textContent = place.name;
+  titleRow.appendChild(name);
+  for (const journeyId of data.journeysByPlace.get(place.id) || []) {
+    const dot = document.createElement('span');
+    dot.className = 'place-tooltip-dot';
+    dot.style.backgroundColor = JOURNEY_COLORS[journeyId];
+    dot.title = data.journeysById.get(journeyId)?.name || '';
+    titleRow.appendChild(dot);
+  }
+  root.appendChild(titleRow);
+  if (place.modernName) {
+    const modern = document.createElement('div');
+    modern.className = 'place-tooltip-sub';
+    modern.textContent = `Modern: ${place.modernName}`;
+    root.appendChild(modern);
+  }
+  const chapterRecords = place.chapters.map((chapter) => data.chaptersByNumber.get(chapter)).filter(Boolean);
+  if (chapterRecords.length > 0) {
+    const startYear = Math.min(...chapterRecords.map((chapter) => chapter.startYear));
+    const endYear = Math.max(...chapterRecords.map((chapter) => chapter.endYear));
+    const approx = chapterRecords.some((chapter) => chapter.uncertainty === UNCERTAINTY.HIGH) ? 'c. ' : '';
+    const era = startYear === endYear ? `${approx}AD ${startYear}` : `${approx}AD ${startYear}–${endYear}`;
+    const line = document.createElement('div');
+    line.className = 'place-tooltip-sub';
+    line.textContent = `${chaptersLabel(place.chapters)} · ${era}`;
+    root.appendChild(line);
+  }
+  return root;
+}
+
+/**
  * Initialize the map, markers, and journey layers.
  * @param {object} data bundle from data.js loadData()
  */
@@ -133,7 +201,7 @@ export function initMap(data) {
     const isStop = data.journeysByPlace.has(place.id);
     const baseStyle = isStop ? MARKER_STYLE.journeyStop : MARKER_STYLE.base;
     const marker = L.circleMarker([place.lat, place.lon], baseStyle);
-    marker.bindTooltip(place.name);
+    marker.bindTooltip(placeTooltip(place, data));
     marker.on('mouseover', () => emit(EVENTS.PLACE_HOVER, { id: place.id }));
     marker.on('mouseout', () => emit(EVENTS.PLACE_UNHOVER, { id: place.id }));
     marker.on('click', (event) => {
