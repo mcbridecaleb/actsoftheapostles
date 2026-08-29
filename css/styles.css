@@ -2,16 +2,48 @@
  * styles.css — grid shell and panel styling for the Acts Geographic Explorer.
  * Journey colors arrive as CSS custom properties (--journey-*) set by main.js
  * from js/config.js so there is a single source of truth.
+ *
+ * Design language: contemporary data-viz app on warm neutrals that complement
+ * the DARE parchment tiles. Inter for UI text, Newsreader for display titles.
+ * Depth via hairline borders + soft shadows; 150-250ms micro-transitions.
  */
 
 :root {
-  --panel-bg: #faf7f2;
-  --panel-border: #d9d2c5;
-  --ink: #2c2620;
-  --ink-soft: #6d6459;
-  --accent: #a05f1e;
-  --highlight: #f1c40f;
-  --callout-width: 320px;
+  /* Type */
+  --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
+
+  /* Warm neutral surfaces (parchment-adjacent) */
+  --surface-0: #f7f3ea;   /* page ground */
+  --surface-1: #fdfbf6;   /* raised panels */
+  --surface-2: #f1ebde;   /* recessed chips / wells */
+  --panel-bg: var(--surface-1);
+  --panel-border: #e4dcca;
+  --panel-border-strong: #d3c8b0;
+
+  /* Ink */
+  --ink: #262017;
+  --ink-soft: #6e6354;
+  --ink-faint: #9a8e7c;
+
+  /* Accents */
+  --accent: #a35c17;          /* warm sienna — buttons, emphasis */
+  --accent-deep: #8a4c11;
+  --highlight: #eab308;       /* hover/selection gold (matches MARKER_STYLE.hover) */
+  --link: #2e5f86;
+
+  /* Depth + shape */
+  --shadow-sm: 0 1px 2px rgba(52, 41, 25, 0.06), 0 1px 1px rgba(52, 41, 25, 0.04);
+  --shadow-md: 0 2px 6px rgba(52, 41, 25, 0.10), 0 8px 24px rgba(52, 41, 25, 0.08);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-quick: 180ms cubic-bezier(0.3, 0.6, 0.3, 1);
+
+  /* Layout */
+  --callout-width: 336px;
   --timeline-height: 150px;
 }
 
@@ -26,9 +58,10 @@ body {
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-ui);
+  font-size: 14px;
   color: var(--ink);
-  background: var(--panel-bg);
+  background: var(--surface-0);
   display: grid;
   grid-template-areas:
     "header header"
@@ -37,48 +70,163 @@ body {
     "footer footer";
   grid-template-columns: 1fr var(--callout-width);
   grid-template-rows: auto 1fr var(--timeline-height) auto;
+  /* Animates the verse-strip expansion (body.timeline-expanded). */
+  transition: grid-template-rows 0.25s ease;
+}
+
+body.timeline-expanded {
+  --timeline-height: 190px;
+}
+
+/* Refined keyboard-focus ring everywhere. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ---- Header ---- */
 
 #header {
   grid-area: header;
+  position: relative;
+  z-index: 1100; /* keep the header's shadow above Leaflet panes */
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1rem 1.5rem;
   flex-wrap: wrap;
-  padding: 0.4rem 0.9rem;
+  padding: 0.55rem 1rem;
   border-bottom: 1px solid var(--panel-border);
-  background: #f3ede3;
+  background: var(--surface-1);
+  box-shadow: var(--shadow-sm);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: var(--radius-md);
+  color: #fdf8ef;
+  background: linear-gradient(135deg, #b56a1e, var(--accent-deep));
+  box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 #header h1 {
-  font-size: 1.05rem;
   margin: 0;
-  font-weight: 650;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1.14rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+.brand-sub {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
 }
 
 #journey-toggles {
   display: flex;
-  gap: 0.9rem;
+  gap: 0.45rem;
   flex-wrap: wrap;
+  margin-left: auto;
 }
 
+/* Journey toggles as pill chips with a color dot; the native checkbox is
+   visually hidden but still drives state + keyboard access. */
 .journey-toggle {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  font-size: 0.85rem;
+  gap: 0.45rem;
+  padding: 0.3rem 0.8rem 0.3rem 0.6rem;
+  font-size: 0.79rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--surface-1);
+  border: 1px solid var(--panel-border-strong);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
   cursor: pointer;
   user-select: none;
+  transition: background var(--ease-quick), color var(--ease-quick),
+              border-color var(--ease-quick), box-shadow var(--ease-quick);
 }
 
+.journey-toggle:hover {
+  border-color: var(--ink-faint);
+  box-shadow: var(--shadow-md);
+}
+
+.journey-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+
+.journey-toggle:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Off state: washed out, hollow dot. */
+.journey-toggle:not(:has(input:checked)) {
+  color: var(--ink-faint);
+  background: transparent;
+  border-style: dashed;
+  box-shadow: none;
+}
+
+.journey-toggle:not(:has(input:checked)) .legend-swatch {
+  opacity: 0.3;
+}
+
+/* The color swatch: square in legend lists, dot inside toggle pills. */
 .legend-swatch {
   display: inline-block;
-  width: 0.85rem;
-  height: 0.85rem;
-  border-radius: 3px;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 4px;
   flex: none;
+  box-shadow: inset 0 0 0 1px rgba(38, 32, 23, 0.12);
+  transition: opacity var(--ease-quick);
+}
+
+.journey-toggle .legend-swatch {
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 50%;
 }
 
 /* ---- Map ---- */
@@ -86,7 +234,69 @@ body {
 #map {
   grid-area: map;
   min-height: 300px;
-  background: #cfe3ec;
+  background: #d9e3e4;
+}
+
+.leaflet-container {
+  font-family: var(--font-ui);
+}
+
+.leaflet-bar {
+  border: 1px solid var(--panel-border-strong) !important;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.leaflet-bar a {
+  background: var(--surface-1);
+  color: var(--ink);
+  border-bottom-color: var(--panel-border);
+  transition: background var(--ease-quick);
+}
+
+.leaflet-bar a:hover {
+  background: var(--surface-2);
+}
+
+.leaflet-control-layers {
+  border: 1px solid var(--panel-border-strong) !important;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md) !important;
+  background: var(--surface-1);
+  color: var(--ink);
+}
+
+.leaflet-control-layers-expanded {
+  font-size: 0.82rem;
+  padding: 8px 12px;
+}
+
+.leaflet-tooltip {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: rgba(253, 251, 246, 0.96);
+  border: 1px solid var(--panel-border-strong);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  padding: 3px 8px;
+}
+
+.leaflet-tooltip-top::before {
+  border-top-color: var(--panel-border-strong);
+}
+
+.leaflet-control-attribution {
+  font-size: 10px;
+  background: rgba(253, 251, 246, 0.82) !important;
+  color: var(--ink-faint);
+  border-top-left-radius: var(--radius-sm);
+}
+
+.leaflet-control-attribution a {
+  color: var(--ink-soft);
 }
 
 /* ---- Callout panel ---- */
@@ -94,47 +304,80 @@ body {
 #callout {
   grid-area: callout;
   overflow-y: auto;
-  padding: 0.9rem 1rem;
+  padding: 1rem 1.1rem 1.2rem;
   border-left: 1px solid var(--panel-border);
   background: var(--panel-bg);
+  box-shadow: inset 6px 0 12px -8px rgba(52, 41, 25, 0.12);
+  scrollbar-width: thin;
+  scrollbar-color: var(--panel-border-strong) transparent;
+}
+
+#callout::-webkit-scrollbar {
+  width: 10px;
+}
+
+#callout::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#callout::-webkit-scrollbar-thumb {
+  background: var(--panel-border-strong);
+  border-radius: var(--radius-pill);
+  border: 3px solid var(--surface-1);
+}
+
+#callout::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-faint);
 }
 
 .callout-title {
   margin: 0 0 0.35rem;
-  font-size: 1.15rem;
+  font-family: var(--font-display);
+  font-size: 1.42rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.005em;
 }
 
 .callout-subtitle {
   margin: 0 0 0.4rem;
   color: var(--ink-soft);
-  font-size: 0.88rem;
+  font-size: 0.84rem;
 }
 
 .callout-subhead {
-  margin: 0.9rem 0 0.3rem;
-  font-size: 0.95rem;
+  margin: 1.1rem 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
 }
 
 .callout-caveat {
-  margin: 0.4rem 0;
-  padding: 0.35rem 0.5rem;
-  background: #f6e8cf;
+  margin: 0.55rem 0;
+  padding: 0.45rem 0.65rem;
+  background: #f8ecd4;
+  border: 1px solid #ecd9b2;
   border-left: 3px solid var(--accent);
-  font-size: 0.82rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  line-height: 1.4;
 }
 
 .callout-description {
-  font-size: 0.88rem;
-  line-height: 1.45;
-  margin: 0.5rem 0;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  margin: 0.55rem 0;
 }
 
 .callout-note {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: var(--ink-soft);
-  line-height: 1.4;
+  line-height: 1.5;
   border-top: 1px solid var(--panel-border);
-  padding-top: 0.6rem;
+  margin-top: 1rem;
+  padding-top: 0.7rem;
 }
 
 .legend-list,
@@ -148,17 +391,18 @@ body {
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
-  margin: 0.25rem 0;
-  font-size: 0.88rem;
+  gap: 0.5rem;
+  margin: 0.3rem 0;
+  font-size: 0.85rem;
 }
 
 .help-list li {
-  font-size: 0.83rem;
-  margin: 0.35rem 0;
-  padding-left: 0.9rem;
+  font-size: 0.82rem;
+  margin: 0.4rem 0;
+  padding-left: 0.95rem;
   position: relative;
-  line-height: 1.35;
+  line-height: 1.45;
+  color: var(--ink-soft);
 }
 
 .help-list li::before {
@@ -172,16 +416,26 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem;
-  margin: 0.5rem 0;
+  margin: 0.6rem 0;
 }
 
 .verse-chip {
-  background: #ece4d4;
+  background: var(--surface-2);
   border: 1px solid var(--panel-border);
-  border-radius: 999px;
-  padding: 0.1rem 0.5rem;
-  font-size: 0.75rem;
+  border-radius: var(--radius-pill);
+  padding: 0.14rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
   white-space: nowrap;
+  transition: background var(--ease-quick), color var(--ease-quick), border-color var(--ease-quick);
+}
+
+.verse-chip:hover {
+  background: var(--surface-1);
+  border-color: var(--panel-border-strong);
+  color: var(--ink);
 }
 
 .callout-button,
@@ -191,35 +445,56 @@ body {
 }
 
 .callout-button {
-  margin-top: 0.4rem;
-  padding: 0.35rem 0.8rem;
-  border: 1px solid var(--accent);
-  border-radius: 4px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  padding: 0.42rem 0.95rem;
+  border: 1px solid var(--accent-deep);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, #b06922, var(--accent));
+  color: #fdf8ef;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--ease-quick), filter var(--ease-quick), transform var(--ease-quick);
 }
 
 .callout-button:hover {
-  filter: brightness(1.1);
+  filter: brightness(1.08);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.callout-button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.place-list {
+  display: flex;
+  flex-direction: column;
 }
 
 .place-list li {
-  margin: 0.1rem 0;
+  margin: 0;
 }
 
 .place-link {
+  display: inline-block;
   background: none;
   border: none;
-  padding: 0.15rem 0;
-  color: #1a5276;
-  font-size: 0.86rem;
+  border-radius: var(--radius-sm);
+  margin: 1px 0 1px -0.5rem;
+  padding: 0.2rem 0.5rem;
+  color: var(--link);
+  font-size: 0.85rem;
+  font-weight: 500;
   text-align: left;
+  transition: background var(--ease-quick), color var(--ease-quick);
 }
 
 .place-link:hover {
-  text-decoration: underline;
-  color: var(--accent);
+  background: var(--surface-2);
+  color: var(--accent-deep);
 }
 
 /* ---- Timeline ---- */
@@ -227,7 +502,8 @@ body {
 #timeline {
   grid-area: timeline;
   border-top: 1px solid var(--panel-border);
-  background: #f3ede3;
+  background: var(--surface-1);
+  box-shadow: inset 0 6px 12px -10px rgba(52, 41, 25, 0.18);
   overflow: hidden;
 }
 
@@ -235,23 +511,29 @@ body {
   display: block;
 }
 
+#timeline text {
+  font-family: var(--font-ui);
+}
+
 .axis-line {
-  stroke: var(--ink-soft);
+  stroke: var(--panel-border-strong);
   stroke-width: 1;
 }
 
 .axis-tick {
-  stroke: var(--ink-soft);
+  stroke: var(--ink-faint);
   stroke-width: 1;
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
 .axis-tick.major {
-  opacity: 1;
+  opacity: 0.9;
 }
 
 .axis-label {
   font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
   fill: var(--ink-soft);
 }
 
@@ -264,7 +546,8 @@ body {
 }
 
 .chapter-block .block-fill {
-  opacity: 0.75;
+  opacity: 0.78;
+  transition: opacity var(--ease-quick);
 }
 
 .chapter-block:hover .block-fill {
@@ -272,8 +555,9 @@ body {
 }
 
 .chapter-block .block-border {
-  stroke: #ffffff;
+  stroke: var(--surface-1);
   stroke-width: 1;
+  transition: stroke var(--ease-quick), stroke-width var(--ease-quick);
 }
 
 .chapter-block .block-border.uncertain {
@@ -289,6 +573,7 @@ body {
   stroke-width: 2.5;
 }
 
+/* Hatched fill = high dating uncertainty (see README chronology note). */
 .hatch-line {
   stroke: rgba(255, 255, 255, 0.55);
   stroke-width: 2;
@@ -301,22 +586,67 @@ body {
   pointer-events: none;
 }
 
+/* ---- Verse-section strip (collapsed sliver row; expands on hover) ---- */
+
+.section-block {
+  cursor: pointer;
+}
+
+.section-block .section-fill {
+  opacity: 0.5;
+  stroke: var(--surface-1);
+  stroke-width: 0.5;
+  transition: opacity var(--ease-quick);
+}
+
+.section-block:hover .section-fill {
+  opacity: 0.95;
+}
+
+.section-block.highlighted .section-fill {
+  opacity: 1;
+  stroke: var(--highlight);
+  stroke-width: 2;
+}
+
+.section-label {
+  font-size: 9px;
+  fill: #ffffff;
+  font-weight: 600;
+  pointer-events: none;
+}
+
 /* ---- Footer ---- */
 
 #footer {
   grid-area: footer;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem 1.4rem;
-  padding: 0.35rem 0.9rem;
-  font-size: 0.72rem;
-  color: var(--ink-soft);
+  align-items: center;
+  gap: 0.3rem 0;
+  padding: 0.4rem 1rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.01em;
+  color: var(--ink-faint);
   border-top: 1px solid var(--panel-border);
-  background: #f3ede3;
+  background: var(--surface-0);
+}
+
+#footer span + span::before {
+  content: "\00b7";
+  margin: 0 0.7rem;
+  color: var(--panel-border-strong);
 }
 
 #footer a {
-  color: inherit;
+  color: var(--ink-soft);
+  text-decoration-color: var(--panel-border-strong);
+  text-underline-offset: 2px;
+  transition: color var(--ease-quick);
+}
+
+#footer a:hover {
+  color: var(--accent-deep);
 }
 
 /* ---- Mobile: stack panels ---- */
@@ -335,45 +665,14 @@ body {
     height: auto;
   }
 
+  #journey-toggles {
+    margin-left: 0;
+  }
+
   #callout {
     border-left: none;
     border-top: 1px solid var(--panel-border);
+    box-shadow: none;
     max-height: 45vh;
   }
-}
-
-/* ---- Verse-section strip (collapsed sliver row; expands on hover) ---- */
-body {
-  transition: grid-template-rows 0.25s ease;
-}
-
-body.timeline-expanded {
-  --timeline-height: 190px;
-}
-
-.section-block {
-  cursor: pointer;
-}
-
-.section-block .section-fill {
-  opacity: 0.5;
-  stroke: #ffffff;
-  stroke-width: 0.5;
-}
-
-.section-block:hover .section-fill {
-  opacity: 0.95;
-}
-
-.section-block.highlighted .section-fill {
-  opacity: 1;
-  stroke: var(--highlight);
-  stroke-width: 2;
-}
-
-.section-label {
-  font-size: 9px;
-  fill: #ffffff;
-  font-weight: 600;
-  pointer-events: none;
 }

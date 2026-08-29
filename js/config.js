@@ -76,10 +76,10 @@ export const SELECTION_TYPES = Object.freeze({ PLACE: 'place', CHAPTER: 'chapter
 
 /** Journey route colors, keyed by journey id from data/journeys.json. */
 export const JOURNEY_COLORS = Object.freeze({
-  j1: '#c0392b',
-  j2: '#2471a3',
-  j3: '#1e8449',
-  rome: '#7d3c98',
+  j1: '#b5443c',
+  j2: '#2e6e8e',
+  j3: '#31795c',
+  rome: '#74489a',
 });
 
 /** Segment travel modes used in data/journeys.json. */
@@ -93,10 +93,10 @@ export const PRECISION = Object.freeze({ EXACT: 'exact', APPROXIMATE: 'approxima
 
 /** Circle-marker styling (journey stops emphasized over other Acts places). */
 export const MARKER_STYLE = Object.freeze({
-  base: { radius: 4, color: '#ffffff', weight: 1, fillColor: '#6d6459', fillOpacity: 0.85 },
-  journeyStop: { radius: 5.5, color: '#ffffff', weight: 1.5, fillColor: '#a05f1e', fillOpacity: 0.95 },
-  hover: { radius: 8, weight: 2.5, color: '#f1c40f' },
-  selected: { radius: 8, weight: 3, color: '#2c3e50' },
+  base: { radius: 4, color: '#ffffff', weight: 1.25, fillColor: '#857767', fillOpacity: 0.85 },
+  journeyStop: { radius: 5.5, color: '#ffffff', weight: 1.5, fillColor: '#b45309', fillOpacity: 0.95 },
+  hover: { radius: 8, weight: 2.5, color: '#eab308' },
+  selected: { radius: 8, weight: 3, color: '#1f2a37' },
 });
 
 /** Route line styling; sea legs render dashed along a sampled bezier bow. */
@@ -130,5 +130,5 @@ export const TIMELINE_LAYOUT = Object.freeze({
   sectionCollapsedHeight: 8,
   sectionExpandedHeight: 42,
   sectionMinLabelWidth: 30,
-  neutralBlockColor: '#9a8f80',
+  neutralBlockColor: '#a29583',
 });
