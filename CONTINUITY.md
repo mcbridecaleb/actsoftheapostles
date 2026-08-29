@@ -35,9 +35,9 @@
 - State:
     - Milestone: 6 of 6 (polish + ship) — built and verified locally; NOT pushed, Pages NOT
       enabled (user confirms that step separately).
-    - Branch/Commit: main, initial commit (see git log; created this session).
+    - Branch/Commit: main, initial commit + markdown-link fix commit (created this session).
     - Related tickets/links: none (NOISSUE).
-    - Last updated: 2026-08-29 14:45 CT
+    - Last updated: 2026-08-29 15:10 CT
 - Done:
     - Data pipeline: raw sources checked into tools/raw/; build_data.py generates
       data/places.json (107 places, 0 unmatched) + data/timeline.json (28 chapters,
@@ -47,6 +47,13 @@
       (all pass node --check); README.md; .nojekyll.
     - Verification: --check exit 0; json.tool passes on all three data files; all page assets
       HTTP 200 via local server; DOM-id and journey-id cross-checks scripted and passing.
+    - Visual verification (headless Chromium via Playwright): DARE tiles render; 4 routes
+      draw with solid land / dashed bezier sea legs; hover place -> callout card + chapter
+      highlight; click chapter (Acts 27) -> map fitBounds + chapter card; Escape clears;
+      zero console errors.
+    - Fix: strip_markdown_links() added to tools/build_data.py — Easton's dictText contained
+      raw markdown links ([Acts 18:12](/acts#...)) that rendered literally in the callout;
+      data/places.json regenerated (107 places, 0 unmatched, --check exit 0).
 - Now:
     - Awaiting user's go-ahead for the outward-facing step (push + enable Pages).
 - Next:

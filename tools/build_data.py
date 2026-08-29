@@ -258,6 +258,14 @@ def parse_float(value: str) -> float | None:
         return None
 
 
+MARKDOWN_LINK_RE = re.compile(r"\[([^\]]+)\]\([^)]*\)")
+
+
+def strip_markdown_links(text: str) -> str:
+    """Replace markdown links like [Acts 18:12](/acts#Acts.18.12) with their plain label text."""
+    return MARKDOWN_LINK_RE.sub(r"\1", text)
+
+
 def load_theographic_places(path: Path) -> dict[str, list[TheographicPlace]]:
     """Index Places.csv rows by lowercased displayTitle, kjvName, esvName, and aliases."""
     index: dict[str, list[TheographicPlace]] = {}
@@ -268,7 +276,7 @@ def load_theographic_places(path: Path) -> dict[str, list[TheographicPlace]]:
                 display_title=row["displayTitle"].strip(),
                 lat=parse_float(row["latitude"]),
                 lon=parse_float(row["longitude"]),
-                dict_text=row["dictText"].strip(),
+                dict_text=strip_markdown_links(row["dictText"].strip()),
                 comment=row["comment"].strip(),
             )
             keys = {row["displayTitle"], row["kjvName"], row["esvName"]}
