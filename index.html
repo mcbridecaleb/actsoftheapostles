@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acts of the Apostles — Geographic Explorer</title>
+  <meta name="description" content="Interactive map, timeline, and gazetteer of every place in the book of Acts, with Paul's missionary journeys and the voyage to Rome.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"
+        integrity="sha512-Zcn6bjR/8RZbLEpLIeOwNtzREBAJnUKESxces60Mpoj+2okopSAcSUIUOseddDm0cxnGQzxIR7vJgsLZbdLE3w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header id="header">
+    <h1>Acts of the Apostles — Geographic Explorer</h1>
+    <div id="journey-toggles" aria-label="Journey visibility toggles"></div>
+  </header>
+  <main id="map" aria-label="Map of Acts places and journeys"></main>
+  <aside id="callout" aria-live="polite"></aside>
+  <section id="timeline" aria-label="Timeline of Acts chapters by year"></section>
+  <footer id="footer">
+    <span>Base map: <a href="https://www.imperium.ahlfeldt.se/">DARE</a> (CC BY 4.0)</span>
+    <span>Place data: <a href="https://www.openbible.info/geo/">OpenBible.info</a> (CC BY)</span>
+    <span>Chronology &amp; descriptions: <a href="https://github.com/robertrouse/theographic-bible-metadata">Theographic</a> / Easton's (CC BY-SA)</span>
+    <span>Code: MIT · Derived data: CC BY-SA</span>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"
+          integrity="sha512-BwHfrr4c9kmRkLw6iXFdzcdWV/PGkVgiIyIWLLlTSXzWQzxuSg4DiQUCpauz/EWjgk5TYQqX/kvn9pG1NpYfqg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

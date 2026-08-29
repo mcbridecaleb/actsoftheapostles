@@ -1,0 +1,343 @@
+/*
+ * styles.css — grid shell and panel styling for the Acts Geographic Explorer.
+ * Journey colors arrive as CSS custom properties (--journey-*) set by main.js
+ * from js/config.js so there is a single source of truth.
+ */
+
+:root {
+  --panel-bg: #faf7f2;
+  --panel-border: #d9d2c5;
+  --ink: #2c2620;
+  --ink-soft: #6d6459;
+  --accent: #a05f1e;
+  --highlight: #f1c40f;
+  --callout-width: 320px;
+  --timeline-height: 150px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--panel-bg);
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "map callout"
+    "timeline timeline"
+    "footer footer";
+  grid-template-columns: 1fr var(--callout-width);
+  grid-template-rows: auto 1fr var(--timeline-height) auto;
+}
+
+/* ---- Header ---- */
+
+#header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  padding: 0.4rem 0.9rem;
+  border-bottom: 1px solid var(--panel-border);
+  background: #f3ede3;
+}
+
+#header h1 {
+  font-size: 1.05rem;
+  margin: 0;
+  font-weight: 650;
+}
+
+#journey-toggles {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.journey-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.legend-swatch {
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 3px;
+  flex: none;
+}
+
+/* ---- Map ---- */
+
+#map {
+  grid-area: map;
+  min-height: 300px;
+  background: #cfe3ec;
+}
+
+/* ---- Callout panel ---- */
+
+#callout {
+  grid-area: callout;
+  overflow-y: auto;
+  padding: 0.9rem 1rem;
+  border-left: 1px solid var(--panel-border);
+  background: var(--panel-bg);
+}
+
+.callout-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.15rem;
+}
+
+.callout-subtitle {
+  margin: 0 0 0.4rem;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.callout-subhead {
+  margin: 0.9rem 0 0.3rem;
+  font-size: 0.95rem;
+}
+
+.callout-caveat {
+  margin: 0.4rem 0;
+  padding: 0.35rem 0.5rem;
+  background: #f6e8cf;
+  border-left: 3px solid var(--accent);
+  font-size: 0.82rem;
+}
+
+.callout-description {
+  font-size: 0.88rem;
+  line-height: 1.45;
+  margin: 0.5rem 0;
+}
+
+.callout-note {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+  border-top: 1px solid var(--panel-border);
+  padding-top: 0.6rem;
+}
+
+.legend-list,
+.help-list,
+.place-list {
+  list-style: none;
+  margin: 0.4rem 0;
+  padding: 0;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0.25rem 0;
+  font-size: 0.88rem;
+}
+
+.help-list li {
+  font-size: 0.83rem;
+  margin: 0.35rem 0;
+  padding-left: 0.9rem;
+  position: relative;
+  line-height: 1.35;
+}
+
+.help-list li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.verse-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 0.5rem 0;
+}
+
+.verse-chip {
+  background: #ece4d4;
+  border: 1px solid var(--panel-border);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.callout-button,
+.place-link {
+  font: inherit;
+  cursor: pointer;
+}
+
+.callout-button {
+  margin-top: 0.4rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.85rem;
+}
+
+.callout-button:hover {
+  filter: brightness(1.1);
+}
+
+.place-list li {
+  margin: 0.1rem 0;
+}
+
+.place-link {
+  background: none;
+  border: none;
+  padding: 0.15rem 0;
+  color: #1a5276;
+  font-size: 0.86rem;
+  text-align: left;
+}
+
+.place-link:hover {
+  text-decoration: underline;
+  color: var(--accent);
+}
+
+/* ---- Timeline ---- */
+
+#timeline {
+  grid-area: timeline;
+  border-top: 1px solid var(--panel-border);
+  background: #f3ede3;
+  overflow: hidden;
+}
+
+#timeline svg {
+  display: block;
+}
+
+.axis-line {
+  stroke: var(--ink-soft);
+  stroke-width: 1;
+}
+
+.axis-tick {
+  stroke: var(--ink-soft);
+  stroke-width: 1;
+  opacity: 0.5;
+}
+
+.axis-tick.major {
+  opacity: 1;
+}
+
+.axis-label {
+  font-size: 10px;
+  fill: var(--ink-soft);
+}
+
+.journey-band {
+  opacity: 0.9;
+}
+
+.chapter-block {
+  cursor: pointer;
+}
+
+.chapter-block .block-fill {
+  opacity: 0.75;
+}
+
+.chapter-block:hover .block-fill {
+  opacity: 1;
+}
+
+.chapter-block .block-border {
+  stroke: #ffffff;
+  stroke-width: 1;
+}
+
+.chapter-block .block-border.uncertain {
+  stroke-dasharray: 3 2;
+}
+
+.chapter-block.highlighted .block-fill {
+  opacity: 1;
+}
+
+.chapter-block.highlighted .block-border {
+  stroke: var(--highlight);
+  stroke-width: 2.5;
+}
+
+.hatch-line {
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 2;
+}
+
+.block-label {
+  font-size: 10px;
+  fill: #ffffff;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+/* ---- Footer ---- */
+
+#footer {
+  grid-area: footer;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--panel-border);
+  background: #f3ede3;
+}
+
+#footer a {
+  color: inherit;
+}
+
+/* ---- Mobile: stack panels ---- */
+
+@media (max-width: 760px) {
+  body {
+    display: grid;
+    grid-template-areas:
+      "header"
+      "map"
+      "callout"
+      "timeline"
+      "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 55vh auto var(--timeline-height) auto;
+    height: auto;
+  }
+
+  #callout {
+    border-left: none;
+    border-top: 1px solid var(--panel-border);
+    max-height: 45vh;
+  }
+}

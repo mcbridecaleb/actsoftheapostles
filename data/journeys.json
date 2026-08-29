@@ -1,0 +1,112 @@
+{
+ "attribution": "Routes hand-authored from the Acts stop sequences; coordinates resolved at runtime from places.json",
+ "journeys": [
+  {
+   "id": "j1",
+   "name": "First Missionary Journey",
+   "ref": "Acts 13-14",
+   "chapters": [13, 14],
+   "startYear": 46,
+   "endYear": 48,
+   "segments": [
+    {"from": "antioch_1", "to": "seleucia", "mode": "land"},
+    {"from": "seleucia", "to": "salamis", "mode": "sea"},
+    {"from": "salamis", "to": "paphos", "mode": "land"},
+    {"from": "paphos", "to": "perga", "mode": "sea"},
+    {"from": "perga", "to": "antioch_2", "mode": "land"},
+    {"from": "antioch_2", "to": "iconium", "mode": "land"},
+    {"from": "iconium", "to": "lystra", "mode": "land"},
+    {"from": "lystra", "to": "derbe", "mode": "land"},
+    {"from": "derbe", "to": "lystra", "mode": "land"},
+    {"from": "lystra", "to": "iconium", "mode": "land"},
+    {"from": "iconium", "to": "antioch_2", "mode": "land"},
+    {"from": "antioch_2", "to": "perga", "mode": "land"},
+    {"from": "perga", "to": "attalia", "mode": "land"},
+    {"from": "attalia", "to": "antioch_1", "mode": "sea", "via": [[36.0, 33.0]]}
+   ]
+  },
+  {
+   "id": "j2",
+   "name": "Second Missionary Journey",
+   "ref": "Acts 15:36-18:22",
+   "chapters": [15, 16, 17, 18],
+   "startYear": 49,
+   "endYear": 52,
+   "segments": [
+    {"from": "antioch_1", "to": "tarsus", "mode": "land"},
+    {"from": "tarsus", "to": "derbe", "mode": "land"},
+    {"from": "derbe", "to": "lystra", "mode": "land"},
+    {"from": "lystra", "to": "iconium", "mode": "land"},
+    {"from": "iconium", "to": "antioch_2", "mode": "land"},
+    {"from": "antioch_2", "to": "troas", "mode": "land"},
+    {"from": "troas", "to": "samothrace", "mode": "sea"},
+    {"from": "samothrace", "to": "neapolis", "mode": "sea"},
+    {"from": "neapolis", "to": "philippi", "mode": "land"},
+    {"from": "philippi", "to": "amphipolis", "mode": "land"},
+    {"from": "amphipolis", "to": "apollonia", "mode": "land"},
+    {"from": "apollonia", "to": "thessalonica", "mode": "land"},
+    {"from": "thessalonica", "to": "berea", "mode": "land"},
+    {"from": "berea", "to": "athens", "mode": "sea", "via": [[38.6, 23.6]]},
+    {"from": "athens", "to": "corinth", "mode": "land"},
+    {"from": "corinth", "to": "cenchreae", "mode": "land"},
+    {"from": "cenchreae", "to": "ephesus", "mode": "sea", "via": [[37.4, 24.8]]},
+    {"from": "ephesus", "to": "caesarea", "mode": "sea", "via": [[35.6, 29.5]]},
+    {"from": "caesarea", "to": "jerusalem", "mode": "land"},
+    {"from": "jerusalem", "to": "antioch_1", "mode": "land"}
+   ]
+  },
+  {
+   "id": "j3",
+   "name": "Third Missionary Journey",
+   "ref": "Acts 18:23-21:17",
+   "chapters": [18, 19, 20, 21],
+   "startYear": 52,
+   "endYear": 57,
+   "segments": [
+    {"from": "antioch_1", "to": "tarsus", "mode": "land"},
+    {"from": "tarsus", "to": "iconium", "mode": "land"},
+    {"from": "iconium", "to": "antioch_2", "mode": "land"},
+    {"from": "antioch_2", "to": "ephesus", "mode": "land"},
+    {"from": "ephesus", "to": "philippi", "mode": "sea", "via": [[39.9, 25.6]]},
+    {"from": "philippi", "to": "thessalonica", "mode": "land"},
+    {"from": "thessalonica", "to": "corinth", "mode": "land"},
+    {"from": "corinth", "to": "philippi", "mode": "land"},
+    {"from": "philippi", "to": "troas", "mode": "sea", "via": [[40.3, 25.4]]},
+    {"from": "troas", "to": "assos", "mode": "land"},
+    {"from": "assos", "to": "mitylene", "mode": "sea"},
+    {"from": "mitylene", "to": "chios", "mode": "sea"},
+    {"from": "chios", "to": "samos", "mode": "sea"},
+    {"from": "samos", "to": "miletus", "mode": "sea"},
+    {"from": "miletus", "to": "cos", "mode": "sea"},
+    {"from": "cos", "to": "rhodes_1", "mode": "sea"},
+    {"from": "rhodes_1", "to": "patara", "mode": "sea"},
+    {"from": "patara", "to": "tyre", "mode": "sea", "via": [[34.7, 32.4]]},
+    {"from": "tyre", "to": "ptolemais", "mode": "sea"},
+    {"from": "ptolemais", "to": "caesarea", "mode": "land"},
+    {"from": "caesarea", "to": "jerusalem", "mode": "land"}
+   ]
+  },
+  {
+   "id": "rome",
+   "name": "Voyage to Rome",
+   "ref": "Acts 27-28",
+   "chapters": [27, 28],
+   "startYear": 59,
+   "endYear": 60,
+   "segments": [
+    {"from": "caesarea", "to": "sidon", "mode": "sea"},
+    {"from": "sidon", "to": "myra", "mode": "sea", "via": [[36.1, 33.2]]},
+    {"from": "myra", "to": "cnidus", "mode": "sea"},
+    {"from": "cnidus", "to": "fair_havens", "mode": "sea", "via": [[35.35, 26.2]]},
+    {"from": "fair_havens", "to": "cauda", "mode": "sea"},
+    {"from": "cauda", "to": "malta", "mode": "sea", "via": [[35.1, 19.0]]},
+    {"from": "malta", "to": "syracuse", "mode": "sea"},
+    {"from": "syracuse", "to": "rhegium", "mode": "sea"},
+    {"from": "rhegium", "to": "puteoli", "mode": "sea", "via": [[39.6, 14.8]]},
+    {"from": "puteoli", "to": "forum_of_appius", "mode": "land"},
+    {"from": "forum_of_appius", "to": "three_taverns", "mode": "land"},
+    {"from": "three_taverns", "to": "rome", "mode": "land"}
+   ]
+  }
+ ]
+}
