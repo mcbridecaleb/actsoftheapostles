@@ -18,19 +18,26 @@ js/state.js           Pub/sub event bus (EventTarget wrapper) + shared hover/sel
 js/data.js            Fetch + index the three JSONs; derives place -> journey membership
 js/map.js             Leaflet: DARE ancient tiles + modern fallback toggle, circle markers,
                       4 journey layers (land solid, sea dashed quadratic-bezier bows)
-js/timeline.js        SVG dual axis: year ticks AD 28-64 + chapter blocks on one x(year) scale
-js/callout.js         Right panel: legend/help, place card, chapter card (textContent only)
+js/timeline.js        SVG dual axis: year ticks AD 28-64 + chapter blocks on one x(year) scale,
+                      plus a collapsed verse-section strip that expands on hover
+js/callout.js         Right panel: legend/help, place, chapter, and section cards (textContent only)
 js/main.js            Bootstrap: load data, wire state, init modules, journey toggles
 data/places.json      GENERATED - all Acts places (representative point, precision flag)
-data/timeline.json    GENERATED - chapter->year chronology + dated Acts events
+data/timeline.json    GENERATED - chapter->year chronology, dated Acts events, and verse
+                      sections (one per point where the narrative's location set changes)
 data/journeys.json    HAND-AUTHORED - 4 journeys as ordered segments referencing place ids
 tools/build_data.py   Stdlib-only Python 3 converter (see below)
 tools/raw/            Checked-in sources: acts.kml, Places.csv, Events.csv
 ```
 
 Components communicate only through the event bus (`PLACE_HOVER/UNHOVER/SELECT`,
-`CHAPTER_HOVER/UNHOVER/SELECT`, `JOURNEY_TOGGLE`, `CLEAR`). Hover is transient; click selects.
-Hovering a place highlights its chapters; clicking a chapter fits the map to its places.
+`CHAPTER_HOVER/UNHOVER/SELECT`, `SECTION_HOVER/UNHOVER/SELECT`, `JOURNEY_TOGGLE`,
+`VIEW_RESET`, `CLEAR`). Hover is transient; click selects. Hovering a place highlights its
+chapters and sections; hovering a chapter or verse section highlights its places on the map;
+clicking a chapter or section fits the map to its places. Below the chapter row sits a thin
+verse-section strip — one sliver per point where the narrative's location set changes
+(derived from theographic's dated events) — that expands on hover for verse-level browsing.
+Press H to reset the map to its home view.
 
 ## Local development
 

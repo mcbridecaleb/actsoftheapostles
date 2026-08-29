@@ -361,6 +361,77 @@ def build_places(kml_places: dict[str, KmlPlace], theo_index: dict[str, list[The
     return records, unmatched
 
 
+"""KJV verse counts per Acts chapter, for positioning verse sections within chapter blocks."""
+ACTS_VERSE_COUNTS: dict[int, int] = {
+    1: 26, 2: 47, 3: 26, 4: 37, 5: 42, 6: 15, 7: 60, 8: 40, 9: 43, 10: 48,
+    11: 30, 12: 25, 13: 52, 14: 28, 15: 41, 16: 40, 17: 34, 18: 28, 19: 41,
+    20: 38, 21: 40, 22: 30, 23: 35, 24: 27, 25: 27, 26: 32, 27: 44, 28: 31,
+}
+
+
+def build_sections(events: list[dict[str, object]], records: list[dict[str, object]]) -> list[dict[str, object]]:
+    """Derive verse sections per chapter: one section per point where the narrative's location set changes.
+
+    Sections come from dated theographic events that carry locations; events sharing a first verse merge.
+    Each section spans from its first verse to the verse before the next section (tiling the whole chapter);
+    a chapter with no located events becomes a single whole-chapter section using all its places.
+    """
+    by_chapter: dict[int, dict[int, dict[str, object]]] = {}
+    for event in events:
+        if not event["placeIds"] or event["chapter"] is None:
+            continue
+        match = ACTS_VERSE_RE.fullmatch(str(event["firstVerse"]))
+        if not match:
+            continue
+        verse = int(match.group(2))
+        bucket = by_chapter.setdefault(int(str(event["chapter"])), {})
+        entry = bucket.get(verse)
+        if entry is None:
+            bucket[verse] = {"title": event["title"], "year": event["year"], "placeIds": set(event["placeIds"])}
+        else:
+            entry["placeIds"].update(event["placeIds"])  # type: ignore[union-attr]
+            if entry["year"] is None:
+                entry["year"] = event["year"]
+    chapter_place_ids: dict[int, set[str]] = {}
+    for record in records:
+        for chapter in record.get("chapters", []):
+            chapter_place_ids.setdefault(int(str(chapter)), set()).add(str(record["id"]))
+    sections: list[dict[str, object]] = []
+    for chapter, (start_year, _end, _unc, label) in sorted(CHAPTER_YEARS.items()):
+        count = ACTS_VERSE_COUNTS[chapter]
+        bucket = by_chapter.get(chapter)
+        if not bucket:
+            sections.append(
+                {
+                    "id": f"s{chapter}-1",
+                    "chapter": chapter,
+                    "startVerse": 1,
+                    "endVerse": count,
+                    "title": label,
+                    "year": start_year,
+                    "placeIds": sorted(chapter_place_ids.get(chapter, set())),
+                }
+            )
+            continue
+        verses = sorted(bucket)
+        for index, verse in enumerate(verses):
+            entry = bucket[verse]
+            start = 1 if index == 0 else verse
+            end = verses[index + 1] - 1 if index + 1 < len(verses) else count
+            sections.append(
+                {
+                    "id": f"s{chapter}-{start}",
+                    "chapter": chapter,
+                    "startVerse": start,
+                    "endVerse": max(end, start),
+                    "title": str(entry["title"]),
+                    "year": entry["year"],
+                    "placeIds": sorted(entry["placeIds"]),  # type: ignore[arg-type]
+                }
+            )
+    return sections
+
+
 def build_timeline(records: list[dict[str, object]], events_path: Path) -> dict[str, object]:
     """Assemble timeline.json: chapter chronology plus dated Acts events."""
     slug_to_id = {r["theographicSlug"]: r["id"] for r in records if r.get("theographicSlug")}
@@ -372,6 +443,7 @@ def build_timeline(records: list[dict[str, object]], events_path: Path) -> dict[
             "uncertainty": uncertainty,
             "label": label,
             "journeys": [jid for jid, chs in JOURNEY_CHAPTERS.items() if chapter in chs],
+            "verseCount": ACTS_VERSE_COUNTS[chapter],
         }
         for chapter, (start, end, uncertainty, label) in sorted(CHAPTER_YEARS.items())
     ]
@@ -394,7 +466,7 @@ def build_timeline(records: list[dict[str, object]], events_path: Path) -> dict[
                 }
             )
     events.sort(key=lambda e: (e["chapter"] or 0, e["firstVerse"]))
-    return {"yearStart": YEAR_START, "yearEnd": YEAR_END, "chapters": chapters, "events": events}
+    return {"yearStart": YEAR_START, "yearEnd": YEAR_END, "chapters": chapters, "events": events, "sections": build_sections(events, records)}
 
 
 def write_json(path: Path, payload: object) -> None:

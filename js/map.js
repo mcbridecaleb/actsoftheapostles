@@ -147,6 +147,7 @@ export function initMap(data) {
 
   /** Re-apply base/hover/selected styles to every marker from shared state. */
   function refreshMarkerStyles() {
+    const groupIds = groupHighlightIds();
     for (const [id, { marker, baseStyle }] of markers) {
       const isSelected = state.selection?.type === SELECTION_TYPES.PLACE && state.selection.id === id;
       const isHovered = state.hover?.type === SELECTION_TYPES.PLACE && state.hover.id === id;
@@ -156,15 +157,41 @@ export function initMap(data) {
       } else if (isHovered) {
         marker.setStyle({ ...baseStyle, ...MARKER_STYLE.hover });
         marker.bringToFront();
+      } else if (groupIds.has(id)) {
+        marker.setStyle({ ...baseStyle, ...MARKER_STYLE.hover });
       } else {
         marker.setStyle(baseStyle);
       }
     }
   }
 
+  /** Place ids highlighted because a chapter or verse section is hovered/selected. */
+  function groupHighlightIds() {
+    const ids = new Set();
+    for (const ref of [state.hover, state.selection]) {
+      if (!ref) {
+        continue;
+      }
+      if (ref.type === SELECTION_TYPES.CHAPTER) {
+        for (const place of data.placesByChapter.get(ref.id) || []) {
+          ids.add(place.id);
+        }
+      } else if (ref.type === SELECTION_TYPES.SECTION) {
+        for (const placeId of data.sectionsById.get(ref.id)?.placeIds || []) {
+          ids.add(placeId);
+        }
+      }
+    }
+    return ids;
+  }
+
   on(EVENTS.PLACE_HOVER, refreshMarkerStyles);
   on(EVENTS.PLACE_UNHOVER, refreshMarkerStyles);
   on(EVENTS.CLEAR, refreshMarkerStyles);
+  on(EVENTS.CHAPTER_HOVER, refreshMarkerStyles);
+  on(EVENTS.CHAPTER_UNHOVER, refreshMarkerStyles);
+  on(EVENTS.SECTION_HOVER, refreshMarkerStyles);
+  on(EVENTS.SECTION_UNHOVER, refreshMarkerStyles);
   on(EVENTS.PLACE_SELECT, ({ id }) => {
     refreshMarkerStyles();
     const place = data.placesById.get(id);
@@ -175,6 +202,15 @@ export function initMap(data) {
   on(EVENTS.CHAPTER_SELECT, ({ chapter }) => {
     refreshMarkerStyles();
     const places = data.placesByChapter.get(chapter) || [];
+    if (places.length > 0) {
+      const bounds = L.latLngBounds(places.map((place) => [place.lat, place.lon]));
+      map.fitBounds(bounds, { maxZoom: CHAPTER_FIT_MAX_ZOOM, padding: CHAPTER_FIT_PADDING });
+    }
+  });
+  on(EVENTS.SECTION_SELECT, ({ id }) => {
+    refreshMarkerStyles();
+    const section = data.sectionsById.get(id);
+    const places = (section?.placeIds || []).map((placeId) => data.placesById.get(placeId)).filter(Boolean);
     if (places.length > 0) {
       const bounds = L.latLngBounds(places.map((place) => [place.lat, place.lon]));
       map.fitBounds(bounds, { maxZoom: CHAPTER_FIT_MAX_ZOOM, padding: CHAPTER_FIT_PADDING });

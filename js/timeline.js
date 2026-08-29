@@ -14,6 +14,7 @@ import {
   JOURNEY_COLORS,
   UNCERTAINTY,
   TIMELINE_LAYOUT,
+  TIMELINE_EXPANDED_CLASS,
 } from './config.js';
 import { on, emit, state } from './state.js';
 
@@ -80,6 +81,25 @@ export function initTimeline(data) {
   const container = document.getElementById('timeline');
   const intervals = computeIntervals(data.chapters);
   const blocksByChapter = new Map();
+  const sectionBlocks = new Map();
+  let expanded = false;
+  let sectionZoneTop = Infinity;
+
+  /** Expand/collapse the verse-section strip; the body class grows the grid row via CSS. */
+  function setExpanded(value) {
+    if (expanded === value) {
+      return;
+    }
+    expanded = value;
+    document.body.classList.toggle(TIMELINE_EXPANDED_CLASS, value);
+    window.requestAnimationFrame(render);
+  }
+
+  container.addEventListener('mousemove', (event) => {
+    const top = container.getBoundingClientRect().top;
+    setExpanded(event.clientY - top >= sectionZoneTop);
+  });
+  container.addEventListener('mouseleave', () => setExpanded(false));
 
   /** Chapters to emphasize for the current hover/selection (place or chapter). */
   function highlightedChapters() {
@@ -95,9 +115,34 @@ export function initTimeline(data) {
         for (const chapter of place?.chapters || []) {
           chapters.add(chapter);
         }
+      } else if (ref.type === SELECTION_TYPES.SECTION) {
+        const section = data.sectionsById.get(ref.id);
+        if (section) {
+          chapters.add(section.chapter);
+        }
       }
     }
     return chapters;
+  }
+
+  /** Section ids to emphasize for the current hover/selection (section or place). */
+  function highlightedSections() {
+    const ids = new Set();
+    for (const ref of [state.selection, state.hover]) {
+      if (!ref) {
+        continue;
+      }
+      if (ref.type === SELECTION_TYPES.SECTION) {
+        ids.add(ref.id);
+      } else if (ref.type === SELECTION_TYPES.PLACE) {
+        for (const section of data.sections) {
+          if (section.placeIds.includes(ref.id)) {
+            ids.add(section.id);
+          }
+        }
+      }
+    }
+    return ids;
   }
 
   /** Apply highlight classes without a full re-render. */
@@ -105,6 +150,10 @@ export function initTimeline(data) {
     const highlighted = highlightedChapters();
     for (const [chapter, group] of blocksByChapter) {
       group.classList.toggle('highlighted', highlighted.has(chapter));
+    }
+    const highlightedSectionIds = highlightedSections();
+    for (const [id, group] of sectionBlocks) {
+      group.classList.toggle('highlighted', highlightedSectionIds.has(id));
     }
   }
 
@@ -116,6 +165,7 @@ export function initTimeline(data) {
       return;
     }
     blocksByChapter.clear();
+    sectionBlocks.clear();
     container.replaceChildren();
     const svg = svgEl('svg', { width, height, role: 'img', 'aria-label': 'Acts chapters by year, AD 28 to 64' });
 
@@ -171,7 +221,10 @@ export function initTimeline(data) {
     }
 
     // Chapter blocks.
-    const blockHeight = Math.max(height - blockTop - blockBottom, 20);
+    const sectionHeight = expanded ? TIMELINE_LAYOUT.sectionExpandedHeight : TIMELINE_LAYOUT.sectionCollapsedHeight;
+    const blockHeight = Math.max(height - blockTop - TIMELINE_LAYOUT.sectionGap - sectionHeight - blockBottom, 20);
+    const sectionY = blockTop + blockHeight + TIMELINE_LAYOUT.sectionGap;
+    sectionZoneTop = sectionY - 3;
     for (const chapter of data.chapters) {
       const { left, right } = intervals.get(chapter.chapter);
       const blockX = x(left);
@@ -221,6 +274,44 @@ export function initTimeline(data) {
       svg.appendChild(group);
     }
 
+    // Verse-section strip: one sliver per point where the narrative's location set changes.
+    for (const section of data.sections) {
+      const chapterRecord = data.chaptersByNumber.get(section.chapter);
+      const interval = intervals.get(section.chapter);
+      if (!chapterRecord || !interval) {
+        continue;
+      }
+      const chapterSpan = interval.right - interval.left;
+      const verseCount = chapterRecord.verseCount;
+      const x1 = x(interval.left + ((section.startVerse - 1) / verseCount) * chapterSpan);
+      const x2 = x(interval.left + (section.endVerse / verseCount) * chapterSpan);
+      const sectionWidth = Math.max(x2 - x1 - 1, 2);
+      const group = svgEl('g', { class: 'section-block' });
+      const journeyIds = chapterRecord.journeys || [];
+      group.appendChild(svgEl('rect', {
+        x: x1, y: sectionY, width: sectionWidth, height: sectionHeight, rx: 1.5,
+        fill: journeyIds.length > 0 ? JOURNEY_COLORS[journeyIds[0]] : TIMELINE_LAYOUT.neutralBlockColor,
+        class: 'section-fill',
+      }));
+      if (expanded && sectionWidth >= TIMELINE_LAYOUT.sectionMinLabelWidth) {
+        const label = svgEl('text', {
+          x: x1 + sectionWidth / 2, y: sectionY + sectionHeight / 2 + 3,
+          class: 'section-label', 'text-anchor': 'middle',
+        });
+        label.textContent = `${section.startVerse}–${section.endVerse}`;
+        group.appendChild(label);
+      }
+      const title = svgEl('title');
+      title.textContent = `Acts ${section.chapter}:${section.startVerse}–${section.endVerse} — ${section.title}`
+        + (section.year ? ` (c. AD ${section.year})` : '');
+      group.appendChild(title);
+      group.addEventListener('mouseenter', () => emit(EVENTS.SECTION_HOVER, { id: section.id }));
+      group.addEventListener('mouseleave', () => emit(EVENTS.SECTION_UNHOVER, { id: section.id }));
+      group.addEventListener('click', () => emit(EVENTS.SECTION_SELECT, { id: section.id }));
+      sectionBlocks.set(section.id, group);
+      svg.appendChild(group);
+    }
+
     container.appendChild(svg);
     refreshHighlights();
   }
@@ -231,7 +322,8 @@ export function initTimeline(data) {
 
   for (const name of [
     EVENTS.PLACE_HOVER, EVENTS.PLACE_UNHOVER, EVENTS.PLACE_SELECT,
-    EVENTS.CHAPTER_HOVER, EVENTS.CHAPTER_UNHOVER, EVENTS.CHAPTER_SELECT, EVENTS.CLEAR,
+    EVENTS.CHAPTER_HOVER, EVENTS.CHAPTER_UNHOVER, EVENTS.CHAPTER_SELECT,
+    EVENTS.SECTION_HOVER, EVENTS.SECTION_UNHOVER, EVENTS.SECTION_SELECT, EVENTS.CLEAR,
   ]) {
     on(name, refreshHighlights);
   }

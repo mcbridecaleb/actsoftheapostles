@@ -341,3 +341,39 @@ body {
     max-height: 45vh;
   }
 }
+
+/* ---- Verse-section strip (collapsed sliver row; expands on hover) ---- */
+body {
+  transition: grid-template-rows 0.25s ease;
+}
+
+body.timeline-expanded {
+  --timeline-height: 190px;
+}
+
+.section-block {
+  cursor: pointer;
+}
+
+.section-block .section-fill {
+  opacity: 0.5;
+  stroke: #ffffff;
+  stroke-width: 0.5;
+}
+
+.section-block:hover .section-fill {
+  opacity: 0.95;
+}
+
+.section-block.highlighted .section-fill {
+  opacity: 1;
+  stroke: var(--highlight);
+  stroke-width: 2;
+}
+
+.section-label {
+  font-size: 9px;
+  fill: #ffffff;
+  font-weight: 600;
+  pointer-events: none;
+}

@@ -59,6 +59,7 @@ export function initCallout(data) {
     const tips = el('ul', 'help-list');
     for (const tip of [
       'Hover a place marker or chapter block to preview it here.',
+      'Hover the thin strip below the chapters to expand verse-by-verse sections.',
       'Click a place to select it; click a chapter to zoom the map to its places.',
       'Solid route lines are land legs; dashed curved lines are sea legs.',
       'Use the checkboxes above the map to toggle each journey.',
@@ -162,6 +163,39 @@ export function initCallout(data) {
     }
   }
 
+  /** Verse-section card. */
+  function renderSection(sectionId) {
+    const section = data.sectionsById.get(sectionId);
+    if (!section) {
+      return;
+    }
+    container.replaceChildren();
+    const verseRange = section.startVerse === section.endVerse
+      ? String(section.startVerse)
+      : `${section.startVerse}–${section.endVerse}`;
+    container.appendChild(el('h2', 'callout-title', `Acts ${section.chapter}:${verseRange}`));
+    if (section.year) {
+      container.appendChild(el('p', 'callout-subtitle', `c. AD ${section.year}`));
+    }
+    container.appendChild(el('p', 'callout-description', section.title));
+    const places = section.placeIds.map((id) => data.placesById.get(id)).filter(Boolean)
+      .sort((a, b) => a.name.localeCompare(b.name));
+    if (places.length > 0) {
+      container.appendChild(el('h3', 'callout-subhead', `Places in this section (${places.length})`));
+      const list = el('ul', 'place-list');
+      for (const place of places) {
+        const item = el('li', '');
+        const button = el('button', 'place-link', place.name);
+        button.addEventListener('mouseenter', () => emit(EVENTS.PLACE_HOVER, { id: place.id }));
+        button.addEventListener('mouseleave', () => emit(EVENTS.PLACE_UNHOVER, { id: place.id }));
+        button.addEventListener('click', () => emit(EVENTS.PLACE_SELECT, { id: place.id }));
+        item.appendChild(button);
+        list.appendChild(item);
+      }
+      container.appendChild(list);
+    }
+  }
+
   /** Re-render whatever the current state calls for (hover wins over selection). */
   function renderCurrent() {
     const ref = state.hover || state.selection;
@@ -169,6 +203,8 @@ export function initCallout(data) {
       renderDefault();
     } else if (ref.type === SELECTION_TYPES.PLACE) {
       renderPlace(ref.id);
+    } else if (ref.type === SELECTION_TYPES.SECTION) {
+      renderSection(ref.id);
     } else {
       renderChapter(ref.id);
     }
@@ -176,7 +212,8 @@ export function initCallout(data) {
 
   for (const name of [
     EVENTS.PLACE_HOVER, EVENTS.PLACE_UNHOVER, EVENTS.PLACE_SELECT,
-    EVENTS.CHAPTER_HOVER, EVENTS.CHAPTER_UNHOVER, EVENTS.CHAPTER_SELECT, EVENTS.CLEAR,
+    EVENTS.CHAPTER_HOVER, EVENTS.CHAPTER_UNHOVER, EVENTS.CHAPTER_SELECT,
+    EVENTS.SECTION_HOVER, EVENTS.SECTION_UNHOVER, EVENTS.SECTION_SELECT, EVENTS.CLEAR,
   ]) {
     on(name, renderCurrent);
   }

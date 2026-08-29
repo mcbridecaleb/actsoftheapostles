@@ -42,6 +42,11 @@ export const MAP_OPTIONS = Object.freeze({
   maxZoom: 11,
   maxBounds: [[24, -12], [52, 48]],
   maxBoundsViscosity: 1.0,
+  // Fractional zoom steps + a higher wheel threshold make scroll zooming glide instead of jump.
+  zoomSnap: 0.25,
+  zoomDelta: 0.5,
+  wheelPxPerZoomLevel: 120,
+  wheelDebounceTime: 25,
 });
 
 /** Event-name enum for the pub/sub bus (see state.js). */
@@ -52,6 +57,9 @@ export const EVENTS = Object.freeze({
   CHAPTER_HOVER: 'chapter-hover',
   CHAPTER_UNHOVER: 'chapter-unhover',
   CHAPTER_SELECT: 'chapter-select',
+  SECTION_HOVER: 'section-hover',
+  SECTION_UNHOVER: 'section-unhover',
+  SECTION_SELECT: 'section-select',
   JOURNEY_TOGGLE: 'journey-toggle',
   VIEW_RESET: 'view-reset',
   CLEAR: 'clear',
@@ -60,8 +68,11 @@ export const EVENTS = Object.freeze({
 /** Keyboard shortcuts (compared case-insensitively for letter keys). */
 export const KEYS = Object.freeze({ CLEAR: 'Escape', HOME: 'h' });
 
+/** Body class that expands the verse-section strip (grid row height lives in CSS). */
+export const TIMELINE_EXPANDED_CLASS = 'timeline-expanded';
+
 /** Selection kinds stored in shared state. */
-export const SELECTION_TYPES = Object.freeze({ PLACE: 'place', CHAPTER: 'chapter' });
+export const SELECTION_TYPES = Object.freeze({ PLACE: 'place', CHAPTER: 'chapter', SECTION: 'section' });
 
 /** Journey route colors, keyed by journey id from data/journeys.json. */
 export const JOURNEY_COLORS = Object.freeze({
@@ -115,5 +126,9 @@ export const TIMELINE_LAYOUT = Object.freeze({
   labelEveryYears: 5,
   minBlockYears: 0.5,
   minLabelWidth: 16,
+  sectionGap: 4,
+  sectionCollapsedHeight: 8,
+  sectionExpandedHeight: 42,
+  sectionMinLabelWidth: 30,
   neutralBlockColor: '#9a8f80',
 });

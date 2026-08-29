@@ -49,6 +49,16 @@ export async function loadData() {
   const chapters = timelineDoc.chapters;
   const chaptersByNumber = new Map(chapters.map((chapter) => [chapter.chapter, chapter]));
 
+  const sections = timelineDoc.sections || [];
+  const sectionsById = new Map(sections.map((section) => [section.id, section]));
+  const sectionsByChapter = new Map();
+  for (const section of sections) {
+    if (!sectionsByChapter.has(section.chapter)) {
+      sectionsByChapter.set(section.chapter, []);
+    }
+    sectionsByChapter.get(section.chapter).push(section);
+  }
+
   const journeys = journeysDoc.journeys;
   const journeysById = new Map(journeys.map((journey) => [journey.id, journey]));
 
@@ -79,6 +89,9 @@ export async function loadData() {
     chapters,
     chaptersByNumber,
     events: timelineDoc.events,
+    sections,
+    sectionsById,
+    sectionsByChapter,
     yearStart: timelineDoc.yearStart,
     yearEnd: timelineDoc.yearEnd,
     journeys,

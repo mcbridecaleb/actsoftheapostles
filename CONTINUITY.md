@@ -37,7 +37,7 @@
       (repo mcbridecaleb/actsoftheapostles, public, Pages from main root).
     - Branch/Commit: main, initial commit + markdown-link fix commit (created this session).
     - Related tickets/links: none (NOISSUE).
-    - Last updated: 2026-08-29 15:40 CT
+    - Last updated: 2026-08-29 16:20 CT
 - Done:
     - Data pipeline: raw sources checked into tools/raw/; build_data.py generates
       data/places.json (107 places, 0 unmatched) + data/timeline.json (28 chapters,
@@ -55,6 +55,14 @@
       raw markdown links ([Acts 18:12](/acts#...)) that rendered literally in the callout;
       data/places.json regenerated (107 places, 0 unmatched, --check exit 0).
 - Now:
+    - Verse-section strip: timeline.json now carries 79 sections (build_sections in
+      build_data.py, from theographic events with locations; ACTS_VERSE_COUNTS positions
+      them within chapter blocks). Collapsed 8px sliver row under the chapters expands to
+      42px on hover (body.timeline-expanded grows the grid row); hovering a section
+      highlights its places on the map + shows a section card; clicking fits the map.
+      Chapter hover now also highlights that chapter's places on the map.
+    - Smoother map wheel zoom: zoomSnap 0.25 / zoomDelta 0.5 / wheelPxPerZoomLevel 120.
+    - Design-modernization pass delegated to an agent (worktree) — pending review/merge.
     - Post-ship tweaks: H hotkey resets map to home view (KEYS + EVENTS.VIEW_RESET in
       config.js, emitted by main.js keydown, handled in map.js; help tip added); route
       line opacity lowered 0.85 -> 0.55 (ROUTE_STYLE in config.js). Verified in headless

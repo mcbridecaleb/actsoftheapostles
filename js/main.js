@@ -21,6 +21,9 @@ function wireState() {
   on(EVENTS.CHAPTER_HOVER, ({ chapter }) => { state.hover = { type: SELECTION_TYPES.CHAPTER, id: chapter }; });
   on(EVENTS.CHAPTER_UNHOVER, () => { state.hover = null; });
   on(EVENTS.CHAPTER_SELECT, ({ chapter }) => { state.selection = { type: SELECTION_TYPES.CHAPTER, id: chapter }; });
+  on(EVENTS.SECTION_HOVER, ({ id }) => { state.hover = { type: SELECTION_TYPES.SECTION, id }; });
+  on(EVENTS.SECTION_UNHOVER, () => { state.hover = null; });
+  on(EVENTS.SECTION_SELECT, ({ id }) => { state.selection = { type: SELECTION_TYPES.SECTION, id }; });
   on(EVENTS.CLEAR, () => { state.hover = null; state.selection = null; });
 }
 

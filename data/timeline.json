@@ -8,7 +8,8 @@
    "endYear": 30,
    "uncertainty": "high",
    "label": "Ascension; Matthias chosen",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 26
   },
   {
    "chapter": 2,
@@ -16,7 +17,8 @@
    "endYear": 30,
    "uncertainty": "high",
    "label": "Pentecost",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 47
   },
   {
    "chapter": 3,
@@ -24,7 +26,8 @@
    "endYear": 31,
    "uncertainty": "high",
    "label": "Healing at the Beautiful Gate",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 26
   },
   {
    "chapter": 4,
@@ -32,7 +35,8 @@
    "endYear": 31,
    "uncertainty": "high",
    "label": "Peter and John before the council",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 37
   },
   {
    "chapter": 5,
@@ -40,7 +44,8 @@
    "endYear": 32,
    "uncertainty": "high",
    "label": "Ananias; apostles arrested",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 42
   },
   {
    "chapter": 6,
@@ -48,7 +53,8 @@
    "endYear": 33,
    "uncertainty": "high",
    "label": "The Seven chosen",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 15
   },
   {
    "chapter": 7,
@@ -56,7 +62,8 @@
    "endYear": 34,
    "uncertainty": "high",
    "label": "Stephen martyred",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 60
   },
   {
    "chapter": 8,
@@ -64,7 +71,8 @@
    "endYear": 35,
    "uncertainty": "high",
    "label": "Philip in Samaria and Gaza",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 40
   },
   {
    "chapter": 9,
@@ -72,7 +80,8 @@
    "endYear": 37,
    "uncertainty": "high",
    "label": "Saul's conversion",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 43
   },
   {
    "chapter": 10,
@@ -80,7 +89,8 @@
    "endYear": 40,
    "uncertainty": "high",
    "label": "Peter and Cornelius",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 48
   },
   {
    "chapter": 11,
@@ -88,7 +98,8 @@
    "endYear": 43,
    "uncertainty": "high",
    "label": "The church in Antioch",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 30
   },
   {
    "chapter": 12,
@@ -96,7 +107,8 @@
    "endYear": 44,
    "uncertainty": "low",
    "label": "Herod Agrippa I dies",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 25
   },
   {
    "chapter": 13,
@@ -106,7 +118,8 @@
    "label": "Cyprus and Pisidian Antioch",
    "journeys": [
     "j1"
-   ]
+   ],
+   "verseCount": 52
   },
   {
    "chapter": 14,
@@ -116,7 +129,8 @@
    "label": "Iconium, Lystra, Derbe",
    "journeys": [
     "j1"
-   ]
+   ],
+   "verseCount": 28
   },
   {
    "chapter": 15,
@@ -126,7 +140,8 @@
    "label": "Jerusalem council",
    "journeys": [
     "j2"
-   ]
+   ],
+   "verseCount": 41
   },
   {
    "chapter": 16,
@@ -136,7 +151,8 @@
    "label": "Philippi",
    "journeys": [
     "j2"
-   ]
+   ],
+   "verseCount": 40
   },
   {
    "chapter": 17,
@@ -146,7 +162,8 @@
    "label": "Thessalonica, Berea, Athens",
    "journeys": [
     "j2"
-   ]
+   ],
+   "verseCount": 34
   },
   {
    "chapter": 18,
@@ -157,7 +174,8 @@
    "journeys": [
     "j2",
     "j3"
-   ]
+   ],
+   "verseCount": 28
   },
   {
    "chapter": 19,
@@ -167,7 +185,8 @@
    "label": "Ephesus",
    "journeys": [
     "j3"
-   ]
+   ],
+   "verseCount": 41
   },
   {
    "chapter": 20,
@@ -177,7 +196,8 @@
    "label": "Macedonia; farewell at Miletus",
    "journeys": [
     "j3"
-   ]
+   ],
+   "verseCount": 38
   },
   {
    "chapter": 21,
@@ -187,7 +207,8 @@
    "label": "Arrest in Jerusalem",
    "journeys": [
     "j3"
-   ]
+   ],
+   "verseCount": 40
   },
   {
    "chapter": 22,
@@ -195,7 +216,8 @@
    "endYear": 57,
    "uncertainty": "medium",
    "label": "Defense before the crowd",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 30
   },
   {
    "chapter": 23,
@@ -203,7 +225,8 @@
    "endYear": 57,
    "uncertainty": "medium",
    "label": "Before the Sanhedrin; to Caesarea",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 35
   },
   {
    "chapter": 24,
@@ -211,7 +234,8 @@
    "endYear": 59,
    "uncertainty": "medium",
    "label": "Before Felix",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 27
   },
   {
    "chapter": 25,
@@ -219,7 +243,8 @@
    "endYear": 59,
    "uncertainty": "low",
    "label": "Before Festus",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 27
   },
   {
    "chapter": 26,
@@ -227,7 +252,8 @@
    "endYear": 59,
    "uncertainty": "low",
    "label": "Before Agrippa II",
-   "journeys": []
+   "journeys": [],
+   "verseCount": 32
   },
   {
    "chapter": 27,
@@ -237,7 +263,8 @@
    "label": "Voyage and shipwreck",
    "journeys": [
     "rome"
-   ]
+   ],
+   "verseCount": 44
   },
   {
    "chapter": 28,
@@ -247,7 +274,8 @@
    "label": "Malta and Rome",
    "journeys": [
     "rome"
-   ]
+   ],
+   "verseCount": 31
   }
  ],
  "events": [
@@ -1094,6 +1122,990 @@
    "year": 57,
    "chapter": 28,
    "firstVerse": "Acts.28.17",
+   "placeIds": [
+    "rome"
+   ]
+  }
+ ],
+ "sections": [
+  {
+   "id": "s1-1",
+   "chapter": 1,
+   "startVerse": 1,
+   "endVerse": 5,
+   "title": "The Holy Spirit is promised",
+   "year": 30,
+   "placeIds": [
+    "mount_of_olives"
+   ]
+  },
+  {
+   "id": "s1-6",
+   "chapter": 1,
+   "startVerse": 6,
+   "endVerse": 11,
+   "title": "Jesus ascends to Heaven",
+   "year": 30,
+   "placeIds": [
+    "mount_of_olives"
+   ]
+  },
+  {
+   "id": "s1-12",
+   "chapter": 1,
+   "startVerse": 12,
+   "endVerse": 26,
+   "title": "Matthias replaces Judas",
+   "year": 30,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s2-1",
+   "chapter": 2,
+   "startVerse": 1,
+   "endVerse": 13,
+   "title": "The Holy Spirit comes",
+   "year": 30,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s2-14",
+   "chapter": 2,
+   "startVerse": 14,
+   "endVerse": 41,
+   "title": "Peter preaches at Pentecost",
+   "year": 30,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s2-42",
+   "chapter": 2,
+   "startVerse": 42,
+   "endVerse": 47,
+   "title": "The church grows",
+   "year": 30,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s3-1",
+   "chapter": 3,
+   "startVerse": 1,
+   "endVerse": 10,
+   "title": "Lame man healed",
+   "year": 30,
+   "placeIds": [
+    "beautiful_gate"
+   ]
+  },
+  {
+   "id": "s3-11",
+   "chapter": 3,
+   "startVerse": 11,
+   "endVerse": 26,
+   "title": "Peter preaches in Solomon's Portico",
+   "year": 30,
+   "placeIds": [
+    "solomon_s_portico"
+   ]
+  },
+  {
+   "id": "s4-1",
+   "chapter": 4,
+   "startVerse": 1,
+   "endVerse": 22,
+   "title": "Peter and John's Trial",
+   "year": 30,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s4-23",
+   "chapter": 4,
+   "startVerse": 23,
+   "endVerse": 31,
+   "title": "Believers pray for boldness",
+   "year": 30,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s4-32",
+   "chapter": 4,
+   "startVerse": 32,
+   "endVerse": 37,
+   "title": "Believers share all things",
+   "year": 30,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s5-1",
+   "chapter": 5,
+   "startVerse": 1,
+   "endVerse": 11,
+   "title": "Ananias and Sapphira lie to God",
+   "year": 30,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s5-12",
+   "chapter": 5,
+   "startVerse": 12,
+   "endVerse": 17,
+   "title": "Apostles work signs and wonders in Solomon's Portico",
+   "year": 30,
+   "placeIds": [
+    "solomon_s_portico"
+   ]
+  },
+  {
+   "id": "s5-18",
+   "chapter": 5,
+   "startVerse": 18,
+   "endVerse": 33,
+   "title": "Apostles arrested, put on trial",
+   "year": 30,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s5-34",
+   "chapter": 5,
+   "startVerse": 34,
+   "endVerse": 42,
+   "title": "Gamaliel advises the counsel and Apostles freed",
+   "year": 30,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s6-1",
+   "chapter": 6,
+   "startVerse": 1,
+   "endVerse": 7,
+   "title": "Seven chosen to serve",
+   "year": 30,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s6-8",
+   "chapter": 6,
+   "startVerse": 8,
+   "endVerse": 15,
+   "title": "Stephen is seized",
+   "year": 30,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s7-1",
+   "chapter": 7,
+   "startVerse": 1,
+   "endVerse": 53,
+   "title": "Stephen addresses the council",
+   "year": 30,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s7-54",
+   "chapter": 7,
+   "startVerse": 54,
+   "endVerse": 60,
+   "title": "Stephen is stoned",
+   "year": 31,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s8-1",
+   "chapter": 8,
+   "startVerse": 1,
+   "endVerse": 3,
+   "title": "Saul persecutes the church",
+   "year": 31,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s8-4",
+   "chapter": 8,
+   "startVerse": 4,
+   "endVerse": 25,
+   "title": "Philip preaches in Samaria",
+   "year": 31,
+   "placeIds": [
+    "samaria_2"
+   ]
+  },
+  {
+   "id": "s8-26",
+   "chapter": 8,
+   "startVerse": 26,
+   "endVerse": 40,
+   "title": "Conversion of Ethiopian Eunuch",
+   "year": 32,
+   "placeIds": [
+    "gaza"
+   ]
+  },
+  {
+   "id": "s9-1",
+   "chapter": 9,
+   "startVerse": 1,
+   "endVerse": 19,
+   "title": "Saul is converted",
+   "year": 32,
+   "placeIds": [
+    "damascus",
+    "straight_street"
+   ]
+  },
+  {
+   "id": "s9-20",
+   "chapter": 9,
+   "startVerse": 20,
+   "endVerse": 31,
+   "title": "Saul proclaims Jesus",
+   "year": 38,
+   "placeIds": [
+    "caesarea",
+    "damascus",
+    "jerusalem",
+    "tarsus"
+   ]
+  },
+  {
+   "id": "s9-32",
+   "chapter": 9,
+   "startVerse": 32,
+   "endVerse": 43,
+   "title": "Peter heals Aeneas and Dorcas",
+   "year": 38,
+   "placeIds": [
+    "joppa",
+    "lod",
+    "sharon_1"
+   ]
+  },
+  {
+   "id": "s10-1",
+   "chapter": 10,
+   "startVerse": 1,
+   "endVerse": 33,
+   "title": "Peter meets Cornelius",
+   "year": 38,
+   "placeIds": [
+    "caesarea",
+    "joppa"
+   ]
+  },
+  {
+   "id": "s10-34",
+   "chapter": 10,
+   "startVerse": 34,
+   "endVerse": 48,
+   "title": "Peter preaches to gentiles in Caesarea",
+   "year": 38,
+   "placeIds": [
+    "caesarea"
+   ]
+  },
+  {
+   "id": "s11-1",
+   "chapter": 11,
+   "startVerse": 1,
+   "endVerse": 18,
+   "title": "Peter defends Gentile salvation",
+   "year": 38,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s11-19",
+   "chapter": 11,
+   "startVerse": 19,
+   "endVerse": 30,
+   "title": "Disciples first called Christians",
+   "year": 40,
+   "placeIds": [
+    "antioch_1"
+   ]
+  },
+  {
+   "id": "s12-1",
+   "chapter": 12,
+   "startVerse": 1,
+   "endVerse": 2,
+   "title": "Herod kills James",
+   "year": 40,
+   "placeIds": [
+    "judea_1"
+   ]
+  },
+  {
+   "id": "s12-3",
+   "chapter": 12,
+   "startVerse": 3,
+   "endVerse": 5,
+   "title": "Herod imprisons Peter",
+   "year": 40,
+   "placeIds": [
+    "judea_1"
+   ]
+  },
+  {
+   "id": "s12-6",
+   "chapter": 12,
+   "startVerse": 6,
+   "endVerse": 19,
+   "title": "An angel rescues Peter from prison",
+   "year": 40,
+   "placeIds": [
+    "judea_1"
+   ]
+  },
+  {
+   "id": "s12-20",
+   "chapter": 12,
+   "startVerse": 20,
+   "endVerse": 23,
+   "title": "Herod dies",
+   "year": 45,
+   "placeIds": [
+    "caesarea"
+   ]
+  },
+  {
+   "id": "s12-24",
+   "chapter": 12,
+   "startVerse": 24,
+   "endVerse": 25,
+   "title": "First missionary journey begins",
+   "year": 45,
+   "placeIds": [
+    "antioch_1",
+    "antioch_2",
+    "attalia",
+    "cyprus",
+    "iconium",
+    "jerusalem",
+    "lystra",
+    "pamphylia",
+    "paphos",
+    "perga",
+    "pisidia",
+    "salamis",
+    "seleucia"
+   ]
+  },
+  {
+   "id": "s13-1",
+   "chapter": 13,
+   "startVerse": 1,
+   "endVerse": 12,
+   "title": "Barnabas and Saul go to Cyprus",
+   "year": 45,
+   "placeIds": [
+    "cyprus",
+    "paphos",
+    "salamis",
+    "seleucia"
+   ]
+  },
+  {
+   "id": "s13-13",
+   "chapter": 13,
+   "startVerse": 13,
+   "endVerse": 52,
+   "title": "Mission to Antioch in Pisidia",
+   "year": 45,
+   "placeIds": [
+    "antioch_2",
+    "iconium",
+    "jerusalem",
+    "pamphylia",
+    "paphos",
+    "perga"
+   ]
+  },
+  {
+   "id": "s14-1",
+   "chapter": 14,
+   "startVerse": 1,
+   "endVerse": 5,
+   "title": "Mission to Iconium",
+   "year": 46,
+   "placeIds": [
+    "iconium"
+   ]
+  },
+  {
+   "id": "s14-6",
+   "chapter": 14,
+   "startVerse": 6,
+   "endVerse": 20,
+   "title": "Mission to Lystra and Derbe",
+   "year": 46,
+   "placeIds": [
+    "derbe",
+    "lystra"
+   ]
+  },
+  {
+   "id": "s14-21",
+   "chapter": 14,
+   "startVerse": 21,
+   "endVerse": 28,
+   "title": "Return to Antioch in Syria",
+   "year": 46,
+   "placeIds": [
+    "antioch_1",
+    "antioch_2",
+    "attalia",
+    "iconium",
+    "lystra",
+    "pamphylia",
+    "perga",
+    "pisidia"
+   ]
+  },
+  {
+   "id": "s15-1",
+   "chapter": 15,
+   "startVerse": 1,
+   "endVerse": 34,
+   "title": "Jerusalem Council",
+   "year": 46,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s15-35",
+   "chapter": 15,
+   "startVerse": 35,
+   "endVerse": 39,
+   "title": "Paul and Barnabas part ways",
+   "year": 47,
+   "placeIds": [
+    "antioch_1",
+    "cyprus"
+   ]
+  },
+  {
+   "id": "s15-40",
+   "chapter": 15,
+   "startVerse": 40,
+   "endVerse": 41,
+   "title": "Second Missionary Journey begins",
+   "year": 47,
+   "placeIds": [
+    "antioch_1",
+    "cilicia",
+    "syria_2"
+   ]
+  },
+  {
+   "id": "s16-1",
+   "chapter": 16,
+   "startVerse": 1,
+   "endVerse": 5,
+   "title": "Timothy Joins Paul and Silas",
+   "year": 47,
+   "placeIds": [
+    "derbe",
+    "lystra"
+   ]
+  },
+  {
+   "id": "s16-6",
+   "chapter": 16,
+   "startVerse": 6,
+   "endVerse": 8,
+   "title": "Mission to Phrygia, Galatia and Asia",
+   "year": 47,
+   "placeIds": [
+    "asia",
+    "galatia",
+    "mysia",
+    "phrygia",
+    "troas"
+   ]
+  },
+  {
+   "id": "s16-9",
+   "chapter": 16,
+   "startVerse": 9,
+   "endVerse": 12,
+   "title": "Call to Macedonia",
+   "year": 47,
+   "placeIds": [
+    "macedonia",
+    "neapolis",
+    "philippi",
+    "samothrace",
+    "troas"
+   ]
+  },
+  {
+   "id": "s16-13",
+   "chapter": 16,
+   "startVerse": 13,
+   "endVerse": 15,
+   "title": "Lydia's Conversion",
+   "year": 47,
+   "placeIds": [
+    "philippi"
+   ]
+  },
+  {
+   "id": "s16-16",
+   "chapter": 16,
+   "startVerse": 16,
+   "endVerse": 18,
+   "title": "Paul casts demon out of soothsayer",
+   "year": 47,
+   "placeIds": [
+    "philippi"
+   ]
+  },
+  {
+   "id": "s16-19",
+   "chapter": 16,
+   "startVerse": 19,
+   "endVerse": 24,
+   "title": "Paul and Silas imprisoned",
+   "year": 47,
+   "placeIds": [
+    "philippi"
+   ]
+  },
+  {
+   "id": "s16-25",
+   "chapter": 16,
+   "startVerse": 25,
+   "endVerse": 34,
+   "title": "Philippian jailer converted",
+   "year": 47,
+   "placeIds": [
+    "philippi"
+   ]
+  },
+  {
+   "id": "s16-35",
+   "chapter": 16,
+   "startVerse": 35,
+   "endVerse": 40,
+   "title": "Paul and Silas released",
+   "year": 47,
+   "placeIds": [
+    "philippi"
+   ]
+  },
+  {
+   "id": "s17-1",
+   "chapter": 17,
+   "startVerse": 1,
+   "endVerse": 9,
+   "title": "Uproar in Thessalonica",
+   "year": 48,
+   "placeIds": [
+    "thessalonica"
+   ]
+  },
+  {
+   "id": "s17-10",
+   "chapter": 17,
+   "startVerse": 10,
+   "endVerse": 15,
+   "title": "Mission to Berea",
+   "year": 48,
+   "placeIds": [
+    "berea"
+   ]
+  },
+  {
+   "id": "s17-16",
+   "chapter": 17,
+   "startVerse": 16,
+   "endVerse": 34,
+   "title": "Paul preaches in Athens",
+   "year": 48,
+   "placeIds": [
+    "areopagus",
+    "athens"
+   ]
+  },
+  {
+   "id": "s18-1",
+   "chapter": 18,
+   "startVerse": 1,
+   "endVerse": 17,
+   "title": "Mission to Corinth, 1&2 Thess Written",
+   "year": 49,
+   "placeIds": [
+    "achaia",
+    "corinth"
+   ]
+  },
+  {
+   "id": "s18-18",
+   "chapter": 18,
+   "startVerse": 18,
+   "endVerse": 23,
+   "title": "Return from Second Missionary Journey",
+   "year": 50,
+   "placeIds": [
+    "antioch_1",
+    "caesarea",
+    "cenchreae",
+    "ephesus",
+    "galatia",
+    "phrygia",
+    "syria_2"
+   ]
+  },
+  {
+   "id": "s18-24",
+   "chapter": 18,
+   "startVerse": 24,
+   "endVerse": 28,
+   "title": "Third Missionary Journey Begins",
+   "year": 50,
+   "placeIds": [
+    "achaia",
+    "ephesus"
+   ]
+  },
+  {
+   "id": "s19-1",
+   "chapter": 19,
+   "startVerse": 1,
+   "endVerse": 22,
+   "title": "Mission to Ephesus/1 Cor Written",
+   "year": 53,
+   "placeIds": [
+    "asia",
+    "ephesus"
+   ]
+  },
+  {
+   "id": "s19-23",
+   "chapter": 19,
+   "startVerse": 23,
+   "endVerse": 41,
+   "title": "Riot in Ephesus",
+   "year": 53,
+   "placeIds": [
+    "asia",
+    "ephesus"
+   ]
+  },
+  {
+   "id": "s20-1",
+   "chapter": 20,
+   "startVerse": 1,
+   "endVerse": 11,
+   "title": "Mission to Macedonia and Greece",
+   "year": 54,
+   "placeIds": [
+    "greece",
+    "macedonia",
+    "philippi",
+    "troas"
+   ]
+  },
+  {
+   "id": "s20-12",
+   "chapter": 20,
+   "startVerse": 12,
+   "endVerse": 15,
+   "title": "Eutychus revived",
+   "year": 54,
+   "placeIds": [
+    "troas"
+   ]
+  },
+  {
+   "id": "s20-16",
+   "chapter": 20,
+   "startVerse": 16,
+   "endVerse": 16,
+   "title": "Voyage to Miletus",
+   "year": 54,
+   "placeIds": [
+    "asia",
+    "assos",
+    "chios",
+    "miletus",
+    "mitylene",
+    "samos",
+    "trogyllium"
+   ]
+  },
+  {
+   "id": "s20-17",
+   "chapter": 20,
+   "startVerse": 17,
+   "endVerse": 38,
+   "title": "Paul speaks to Ephesian Elders",
+   "year": 54,
+   "placeIds": [
+    "miletus"
+   ]
+  },
+  {
+   "id": "s21-1",
+   "chapter": 21,
+   "startVerse": 1,
+   "endVerse": 17,
+   "title": "Voyage from Miletus to Jerusalem",
+   "year": 54,
+   "placeIds": [
+    "caesarea",
+    "cos",
+    "cyprus",
+    "jerusalem",
+    "judea_1",
+    "patara",
+    "phoenicia",
+    "ptolemais",
+    "rhodes_1",
+    "syria_2",
+    "tyre"
+   ]
+  },
+  {
+   "id": "s21-18",
+   "chapter": 21,
+   "startVerse": 18,
+   "endVerse": 26,
+   "title": "Paul visits elders in Jerusalem",
+   "year": 54,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s21-27",
+   "chapter": 21,
+   "startVerse": 27,
+   "endVerse": 36,
+   "title": "Paul arrested in the Temple",
+   "year": 54,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s21-37",
+   "chapter": 21,
+   "startVerse": 37,
+   "endVerse": 40,
+   "title": "Paul gives his testimony",
+   "year": 54,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s22-1",
+   "chapter": 22,
+   "startVerse": 1,
+   "endVerse": 30,
+   "title": "Paul goes before the Council",
+   "year": 54,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s23-1",
+   "chapter": 23,
+   "startVerse": 1,
+   "endVerse": 22,
+   "title": "The conspiracy to kill Paul",
+   "year": 54,
+   "placeIds": [
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s23-23",
+   "chapter": 23,
+   "startVerse": 23,
+   "endVerse": 35,
+   "title": "Paul sent to Felix",
+   "year": 56,
+   "placeIds": [
+    "caesarea"
+   ]
+  },
+  {
+   "id": "s24-1",
+   "chapter": 24,
+   "startVerse": 1,
+   "endVerse": 27,
+   "title": "Before Felix",
+   "year": 57,
+   "placeIds": [
+    "asia",
+    "caesarea",
+    "jerusalem"
+   ]
+  },
+  {
+   "id": "s25-1",
+   "chapter": 25,
+   "startVerse": 1,
+   "endVerse": 12,
+   "title": "Paul appeals to Caesar",
+   "year": 56,
+   "placeIds": [
+    "caesarea"
+   ]
+  },
+  {
+   "id": "s25-13",
+   "chapter": 25,
+   "startVerse": 13,
+   "endVerse": 21,
+   "title": "Agrippa and Bernice meet Festus",
+   "year": 56,
+   "placeIds": [
+    "caesarea"
+   ]
+  },
+  {
+   "id": "s25-22",
+   "chapter": 25,
+   "startVerse": 22,
+   "endVerse": 27,
+   "title": "Paul goes before Agrippa",
+   "year": 56,
+   "placeIds": [
+    "caesarea"
+   ]
+  },
+  {
+   "id": "s26-1",
+   "chapter": 26,
+   "startVerse": 1,
+   "endVerse": 32,
+   "title": "Before Agrippa II",
+   "year": 59,
+   "placeIds": [
+    "damascus",
+    "jerusalem",
+    "judea_1",
+    "nazareth"
+   ]
+  },
+  {
+   "id": "s27-1",
+   "chapter": 27,
+   "startVerse": 1,
+   "endVerse": 12,
+   "title": "Journey to Rome begins",
+   "year": 56,
+   "placeIds": [
+    "adramyttium",
+    "adriatic_sea",
+    "alexandria",
+    "asia",
+    "cauda",
+    "cilicia",
+    "cnidus",
+    "crete",
+    "cyprus",
+    "fair_havens",
+    "italy",
+    "lasea",
+    "lycia",
+    "malta",
+    "myra",
+    "pamphylia",
+    "phoenix",
+    "puteoli",
+    "rhegium",
+    "rome",
+    "salmone",
+    "syracuse",
+    "syrtis",
+    "three_taverns"
+   ]
+  },
+  {
+   "id": "s27-13",
+   "chapter": 27,
+   "startVerse": 13,
+   "endVerse": 44,
+   "title": "Paul is shipwrecked by a storm",
+   "year": 57,
+   "placeIds": [
+    "adriatic_sea",
+    "cauda",
+    "crete",
+    "syrtis"
+   ]
+  },
+  {
+   "id": "s28-1",
+   "chapter": 28,
+   "startVerse": 1,
+   "endVerse": 10,
+   "title": "Paul stays at Malta",
+   "year": 57,
+   "placeIds": [
+    "malta"
+   ]
+  },
+  {
+   "id": "s28-11",
+   "chapter": 28,
+   "startVerse": 11,
+   "endVerse": 16,
+   "title": "Paul arrives at Rome",
+   "year": 57,
+   "placeIds": [
+    "forum_of_appius",
+    "puteoli",
+    "rhegium",
+    "rome",
+    "syracuse",
+    "three_taverns"
+   ]
+  },
+  {
+   "id": "s28-17",
+   "chapter": 28,
+   "startVerse": 17,
+   "endVerse": 31,
+   "title": "Paul's First Roman imprisonment",
+   "year": 57,
    "placeIds": [
     "rome"
    ]
