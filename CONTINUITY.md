@@ -33,11 +33,11 @@
     - Acts 18 belongs to J2 and J3 -> its timeline block splits into two color stripes.
     - Journey colors defined once in js/config.js; main.js exports them to CSS custom props.
 - State:
-    - Milestone: 6 of 6 (polish + ship) — built and verified locally; NOT pushed, Pages NOT
-      enabled (user confirms that step separately).
+    - Milestone: 6 of 6 — SHIPPED. Live at https://mcbridecaleb.github.io/actsoftheapostles/
+      (repo mcbridecaleb/actsoftheapostles, public, Pages from main root).
     - Branch/Commit: main, initial commit + markdown-link fix commit (created this session).
     - Related tickets/links: none (NOISSUE).
-    - Last updated: 2026-08-29 15:10 CT
+    - Last updated: 2026-08-29 15:25 CT
 - Done:
     - Data pipeline: raw sources checked into tools/raw/; build_data.py generates
       data/places.json (107 places, 0 unmatched) + data/timeline.json (28 chapters,
@@ -55,13 +55,14 @@
       raw markdown links ([Acts 18:12](/acts#...)) that rendered literally in the callout;
       data/places.json regenerated (107 places, 0 unmatched, --check exit 0).
 - Now:
-    - Awaiting user's go-ahead for the outward-facing step (push + enable Pages).
+    - Shipped. Pushed to origin (existing empty repo Caleb pre-created; flipped private ->
+      public with user approval), Pages enabled, live page + all css/js/data assets verified
+      HTTP 200.
 - Next:
-    1. Push main to GitHub and enable Pages
-       (`gh api repos/<owner>/actsoftheapostles/pages -X POST -f "source[branch]=main" -f "source[path]=/"`).
-    2. Verify the live URL renders identically (relative paths only).
-    3. Optional polish: tune sea-leg `via` waypoints visually; consider marker clustering at
+    1. Optional polish: tune sea-leg `via` waypoints visually; consider marker clustering at
        low zoom if Jerusalem-area markers feel crowded.
+    2. Optional: mini-routes for early Acts movements (Philip in ch. 8, Peter in 9-10,
+       Paul's conversion road in 9).
 - Open questions (UNCONFIRMED if needed):
     - None blocking. UNCONFIRMED: DARE tile-host uptime (single academic server) — modern
       fallback layer doubles as the outage fallback.
